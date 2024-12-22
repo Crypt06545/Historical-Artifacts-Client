@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -55,7 +54,7 @@ const Login = () => {
           </button>
         </div>
         <p className="text-xs text-center sm:px-6 text-[#E0D9D1]">
-          Don't have an account?
+          Don&apos;t have an account?
           <Link to={'/register'}
             
             className="underline text-[#D1B38A]"
