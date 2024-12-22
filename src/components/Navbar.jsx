@@ -30,7 +30,7 @@ const Navbar = () => {
           isMenuOpen ? "block" : "hidden"
         } lg:flex flex-1 justify-center absolute lg:static top-full left-0 w-full bg-[#302E2F] lg:bg-transparent z-10`}
       >
-        <ul className="menu menu-vertical lg:menu-horizontal gap-6 px-4 py-2 lg:py-0 text-center">
+        <ul className="menu-vertical lg:menu-horizontal gap-8 px-4 py-2 lg:py-0 text-center">
           <li>
             <NavLink
               to="/"
@@ -43,7 +43,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/jobs"
+              to="/all-artifacts"
               className={({ isActive }) =>
                 isActive ? "text-[#D99578]" : "text-white"
               }
@@ -61,27 +61,49 @@ const Navbar = () => {
               Add Artifacts
             </NavLink>
           </li>
-        </ul>
-      </div>
-
-      <div className="btn">
-        <ul>
+          <li>
+            <NavLink
+              to="/view-artifact"
+              className={({ isActive }) =>
+                isActive ? "text-[#D99578]" : "text-white"
+              }
+            >
+              View Artifacts
+            </NavLink>
+          </li><li>
+            <NavLink
+              to="/my-add-artifact"
+              className={({ isActive }) =>
+                isActive ? "text-[#D99578]" : "text-white"
+              }
+            >
+              My Artifacts
+            </NavLink>
+          </li>
+          {/* Login Button for Small Screens */}
           {!user && (
-            <li>
-              <NavLink
+            <li className="lg:hidden ">
+              <Link
                 to="/login"
-                className={({ isActive }) =>
-                  isActive ? "text-[#D99578]" : "text-white"
-                }
+                className="px-3 py-3 text-center font-semibold text-white bg-[#9C6F42] rounded-md hover:bg-[#7B5A36] focus:outline-none focus:bg-[#7B5A36]"
               >
                 Login
-              </NavLink>
+              </Link>
             </li>
           )}
         </ul>
       </div>
-      {/* User or Login Section */}
+
+      {/* User or Login Section for Large Screens */}
       <div className="hidden lg:flex items-center lg:ml-auto">
+        {!user && (
+          <Link
+            to="/login"
+            className="px-3 py-3 font-semibold text-white bg-[#9C6F42] rounded-md hover:bg-[#7B5A36] focus:outline-none focus:bg-[#7B5A36]"
+          >
+            Login
+          </Link>
+        )}
         {user && (
           <div className="dropdown dropdown-end">
             <div
@@ -101,9 +123,7 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link to="/add-job">Add Job</Link>
-              </li>
+             
               <li>
                 <Link to="/">My Artifacts</Link>
               </li>
