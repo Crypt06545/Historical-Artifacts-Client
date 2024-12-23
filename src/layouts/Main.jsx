@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import LoadingSpinner from '../components/Loader'
 
 const Main = () => {
   return (
@@ -12,6 +13,7 @@ const Main = () => {
         <Outlet />
       </div>
       {/* Footer */}
+      {/* <LoadingSpinner/> */}
       <Footer />
     </div>
   )
