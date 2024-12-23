@@ -7,54 +7,72 @@ import toast from "react-hot-toast";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || "/";
+  // const from = location?.state || "/";
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState(""); // Initialize email state
+  const [password, setPassword] = useState(""); // Initialize password state
 
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { logIn, googleSignIn, setUser } = useContext(AuthContext);
 
-  // Email Password Signin
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const pass = form.password.value;
-    console.log({ email, pass });
-    try {
-      //User Login
-      await signIn(email, pass);
-      toast.success("Signin Successful");
-      navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
     }
   };
 
   // Google Signin
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        setUser(res.user);
+        navigate(location?.state ? location.state : "/");
+        toast.success("Logged in with Google!");
+      })
+      .catch(() => toast.error("Google login failed. Please try again."));
+  };
 
-      toast.success("Signin Successful");
-      navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+  // Login submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please fill in both email and password.");
+      return;
     }
+    logIn(email, password)
+      .then((res) => {
+        setUser(res.user);
+        navigate(location?.state ? location.state : "/");
+        toast.success("Logged in successfully!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode === "auth/user-not-found") {
+          toast.error("This email is not registered. Please sign up.");
+        } else if (errorCode === "auth/wrong-password") {
+          toast.error("Incorrect password. Please try again.");
+        } else {
+          toast.error("Login failed. Please try again later.");
+        }
+      });
   };
 
   return (
     <div className="bg-[#1F1D1D] min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
         <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">Login</h1>
-        <form onSubmit={handleSignIn} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6"> {/* Change to handleSubmit */}
           <div className="space-y-1 text-sm">
-            <label htmlFor="user Email" className="block text-[#E0D9D1]">
+            <label htmlFor="email" className="block text-[#E0D9D1]">
               Email
             </label>
             <input
               type="email"
               name="email"
+              value={email}
+              onChange={handleChange}
               placeholder="Use Email"
               required
               className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
@@ -68,6 +86,8 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
+                value={password}
+                onChange={handleChange}
                 required
                 placeholder="Password"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
@@ -81,7 +101,7 @@ const Login = () => {
               </button>
             </div>
             <div className="flex justify-end text-xs text-[#E0D9D1]">
-              <a rel="noopener noreferrer">Forgot Password?</a>
+              <Link to="/forgot-password">Forgot Password?</Link> {/* Added Link to Forgot Password */}
             </div>
           </div>
           <button className="block w-full p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]">
@@ -112,7 +132,7 @@ const Login = () => {
         </div>
         <p className="text-xs text-center sm:px-6 text-[#E0D9D1]">
           Don&apos;t have an account?{" "}
-          <Link to={"/register"} className="underline text-[#D1B38A]">
+          <Link to="/register" className="underline text-[#D1B38A]">
             Sign up
           </Link>
         </p>

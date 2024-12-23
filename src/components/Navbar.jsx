@@ -63,16 +63,6 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/view-artifact"
-              className={({ isActive }) =>
-                isActive ? "text-[#D99578]" : "text-white"
-              }
-            >
-              View Artifacts
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="/my-add-artifact"
               className={({ isActive }) =>
                 isActive ? "text-[#D99578]" : "text-white"

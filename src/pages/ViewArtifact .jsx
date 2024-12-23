@@ -1,12 +1,50 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa"; // Importing the heart icon from react-icons
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import LoadingSpinner from "../components/Loader";
 
 const ViewArtifact = () => {
-  const [liked, setLiked] = useState(false); // State to track if the artifact is liked
+  const { id } = useParams();
+  console.log(id);
+
+  const [artifact, setArtifact] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch the artifact details on component mount
+  useEffect(() => {
+    const fetchArtifactDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/view-artifact-details/${id}`
+        );
+        console.log(response.data);
+        setArtifact(response.data);
+        // Store the artifact data in state
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to load artifact details", err);
+        setLoading(false);
+      }
+    };
+
+    fetchArtifactDetails();
+  }, [id]); // Re-run the effect when the ID changes
 
   const toggleLike = () => {
     setLiked(!liked); // Toggle the like state when clicked
   };
+
+  // Render loading state using LoadingSpinner or error message
+  if (loading) {
+    return <LoadingSpinner />; // Show the loading spinner while data is being fetched
+  }
+
+  if (error) {
+    return <div>{error}</div>; // Show error message if there is an error
+  }
 
   return (
     <div className="bg-[#1F1D1D] py-14 min-h-screen flex items-center justify-center">
@@ -19,29 +57,29 @@ const ViewArtifact = () => {
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-x-6">
           <div className="w-full sm:w-1/3">
             <img
-              src="https://via.placeholder.com/300x400"
+              src={artifact?.artifactImage}
               alt="Artifact"
               className="w-full rounded-md shadow-lg"
             />
           </div>
           <div className="w-full sm:w-2/3 space-y-4">
             <h2 className="text-2xl font-bold text-[#D1B38A]">
-              Artifact Name: Ancient Sword
+              Artifact Name: {artifact?.artifactName}
             </h2>
             <p className="text-sm text-[#E0D9D1]">
-              <strong>Artifact Type:</strong> Weapon
+              <strong>Artifact Type:</strong> {artifact?.artifactType}
             </p>
             <p className="text-sm text-[#E0D9D1]">
-              <strong>Created At:</strong> 500 BC
+              <strong>Created At:</strong> {artifact?.createdAt}
             </p>
             <p className="text-sm text-[#E0D9D1]">
-              <strong>Discovered At:</strong> 1799
+              <strong>Discovered At:</strong> {artifact?.discoveredAt}
             </p>
             <p className="text-sm text-[#E0D9D1]">
-              <strong>Discovered By:</strong> Dr. John Smith
+              <strong>Discovered By:</strong> {artifact?.discoveredBy}
             </p>
             <p className="text-sm text-[#E0D9D1]">
-              <strong>Present Location:</strong> National Museum, London
+              <strong>Present Location:</strong> {artifact?.presentLocation}
             </p>
           </div>
         </div>
@@ -52,10 +90,7 @@ const ViewArtifact = () => {
             <strong>Historical Context</strong>
           </label>
           <p className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1]">
-            This sword was crafted during the Iron Age and was used in numerous
-            battles. It is believed to have belonged to a high-ranking military
-            officer in the ancient kingdom. The sword has intricate carvings,
-            believed to represent the owner's personal victories.
+            {artifact?.historicalContext}
           </p>
         </div>
 
@@ -68,7 +103,7 @@ const ViewArtifact = () => {
             type="text"
             name="userInfo"
             id="userInfo"
-            value="John Doe (johndoe@example.com)" // Replace with dynamic data
+            defaultValue={artifact?.createdby?.email} // Replace with dynamic data
             readOnly
             className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
           />
@@ -78,9 +113,15 @@ const ViewArtifact = () => {
         <div className="flex justify-center space-x-4">
           <button
             onClick={toggleLike}
-            className={`p-3 rounded-full ${liked ? "bg-[#D1B38A]" : "bg-[#5D5453]"} text-[#1F1D1D] hover:bg-[#D1B38A]`}
+            className={`p-3 rounded-full ${
+              liked ? "bg-[#D1B38A]" : "bg-[#5D5453]"
+            } text-[#1F1D1D] hover:bg-[#D1B38A]`}
           >
-            <FaHeart className={`w-6 h-6 ${liked ? "text-[#A9927D]" : "text-[#E0D9D1]"}`} />
+            <FaHeart
+              className={`w-6 h-6 ${
+                liked ? "text-[#A9927D]" : "text-[#E0D9D1]"
+              }`}
+            />
           </button>
         </div>
 

@@ -13,6 +13,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <h1>This is errror</h1>,
     children: [
       {
         path: "/",
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/view-artifact",
+        path: "/view-artifact-details/:id",
         element: (
           <PrivateRoute>
             <ViewArtifact />

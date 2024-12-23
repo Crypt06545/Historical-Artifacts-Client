@@ -1,11 +1,62 @@
-import React from 'react';
-
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 const AddArtifact = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
+  // console.log(user?.email);
+
+  const [addArtifacts, setAddArtifacts] = useState({
+    artifactName: "",
+    artifactImage: "",
+    artifactType: "Tools",
+    historicalContext: "",
+    createdAt: "",
+    discoveredAt: "",
+    discoveredBy: "",
+    presentLocation: "",
+    userInfo: user?.email,
+    createdby: {
+      displayName: user?.displayName || "Unknown User",
+      email: user?.email || "No Email",
+      photoURL: user?.photoURL || "No Photo",
+    },
+    react: 0,
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddArtifacts((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleAddArtifact = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    axios
+      .post(`${import.meta.env.VITE_API_BASE_URL}/add-artifact`, addArtifacts)
+      .then((response) => {
+        // Handle the successful response
+        console.log("Artifact added successfully:", response.data);
+        toast.success("Artifact added successfully!"); // Display a success message
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error("Error adding artifact:", error);
+        toast.error("Failed to add artifact. Please try again."); // Display an error message
+      });
+  };
+
   return (
     <div className="bg-[#1F1D1D] min-h-screen py-20 flex items-center justify-center">
       <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
-        <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">Add New Artifact</h1>
-        <form noValidate="" action="" className="space-y-6">
+        <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">
+          Add New Artifact
+        </h1>
+        <form onSubmit={handleAddArtifact} className="space-y-6">
           {/* Artifact Name and Image (Side by Side) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1 text-sm">
@@ -15,7 +66,9 @@ const AddArtifact = () => {
               <input
                 type="text"
                 name="artifactName"
-                id="artifactName"
+                value={addArtifacts.artifactName}
+                onChange={handleInputChange}
+                required
                 placeholder="Enter artifact name"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -27,7 +80,9 @@ const AddArtifact = () => {
               <input
                 type="url"
                 name="artifactImage"
-                id="artifactImage"
+                required
+                value={addArtifacts.artifactImage}
+                onChange={handleInputChange}
                 placeholder="Enter image URL"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -42,7 +97,9 @@ const AddArtifact = () => {
               </label>
               <select
                 name="artifactType"
-                id="artifactType"
+                required
+                value={addArtifacts.artifactType}
+                onChange={handleInputChange}
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               >
                 <option value="Tools">Tools</option>
@@ -53,12 +110,17 @@ const AddArtifact = () => {
               </select>
             </div>
             <div className="space-y-1 text-sm">
-              <label htmlFor="historicalContext" className="block text-[#E0D9D1]">
+              <label
+                htmlFor="historicalContext"
+                className="block text-[#E0D9D1]"
+              >
                 Historical Context
               </label>
               <textarea
                 name="historicalContext"
-                id="historicalContext"
+                value={addArtifacts.historicalContext}
+                onChange={handleInputChange}
+                required
                 rows="3"
                 placeholder="Enter historical context"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
@@ -75,7 +137,9 @@ const AddArtifact = () => {
               <input
                 type="text"
                 name="createdAt"
-                id="createdAt"
+                required
+                value={addArtifacts.createdAt}
+                onChange={handleInputChange}
                 placeholder="e.g., 100 BC"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -87,7 +151,9 @@ const AddArtifact = () => {
               <input
                 type="text"
                 name="discoveredAt"
-                id="discoveredAt"
+                required
+                value={addArtifacts.discoveredAt}
+                onChange={handleInputChange}
                 placeholder="e.g., 1799"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -103,7 +169,9 @@ const AddArtifact = () => {
               <input
                 type="text"
                 name="discoveredBy"
-                id="discoveredBy"
+                required
+                value={addArtifacts.discoveredBy}
+                onChange={handleInputChange}
                 placeholder="Enter discoverer's name"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -115,7 +183,9 @@ const AddArtifact = () => {
               <input
                 type="text"
                 name="presentLocation"
-                id="presentLocation"
+                required
+                value={addArtifacts.presentLocation}
+                onChange={handleInputChange}
                 placeholder="Enter present location"
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
               />
@@ -130,9 +200,10 @@ const AddArtifact = () => {
             <input
               type="text"
               name="userInfo"
-              id="userInfo"
-              defaultValue="John Doe (johndoe@example.com)" // This should be dynamically populated
-            //   readOnly
+              defaultValue={user?.email}
+              // value={addArtifacts.userInfo}
+              onChange={handleInputChange}
+              readOnly
               className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
             />
           </div>

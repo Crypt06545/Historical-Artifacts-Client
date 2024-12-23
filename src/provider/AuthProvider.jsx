@@ -1,77 +1,81 @@
-/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import {
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
-  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config";
-import LoadingSpinner from "../components/Loader";
+import app from "../firebase/firebase.config";
+// import LoadingSpinner from "../components/Loader";
 
-export const AuthContext = createContext(null);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  // Sign up a user
+  const createNewUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const signInWithGoogle = () => {
-    setLoading(true);
-    return signInWithPopup(auth, googleProvider);
-  };
-
-  const logOut = async () => {
-    setLoading(true);
-    return signOut(auth);
-  };
-
-  const updateUserProfile = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
+    return createUserWithEmailAndPassword(auth, email, password).finally(() => {
+      setLoading(false);
     });
   };
 
-  // Track authentication state
+  // Log in a user
+  const logIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password).finally(() => {
+      setLoading(false);
+    });
+  };
+
+  // Google Sign in
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    setLoading(true);
+    return signInWithPopup(auth, provider).finally(() => {
+      setLoading(false);
+    });
+  };
+
+  // Log out a user
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth).finally(() => {
+      setLoading(false);
+    });
+  };
+
+  // Observe user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false); // Firebase auth initialization complete
+      setLoading(false);
     });
-    return () => unsubscribe();
-  }, []);
 
-  const authInfo = {
+    return () => unsubscribe();
+  }, [auth]);
+
+  const userInfo = {
     user,
     setUser,
-    loading,
-    setLoading,
-    createUser,
-    signIn,
-    signInWithGoogle,
+    auth,
+    createNewUser,
+    logIn,
+    googleSignIn,
     logOut,
-    updateUserProfile,
+    loading,
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>
-      {loading ? <LoadingSpinner /> : children}
+    <AuthContext.Provider value={userInfo}>
+      {/* {loading ? <LoadingSpinner /> : children} */}
+      {children}
     </AuthContext.Provider>
   );
 };
