@@ -9,9 +9,18 @@ const PrivateRoute = ({ children }) => {
 
   const location = useLocation();
 
-  if (loading) return <LoadingSpinner />;
-  if (user) return children;
-  return <Navigate to="/login" state={location.pathname} />;
+  if (loading) {
+    // Show loader while checking authentication
+    return <LoadingSpinner />;
+  }
+
+  if (user) {
+    // User is authenticated, render the children
+    return children;
+  }
+
+  // Redirect to login with the state of the previous location
+  return <Navigate to="/login" state={{ from: location }} />;
 };
 
 export default PrivateRoute;

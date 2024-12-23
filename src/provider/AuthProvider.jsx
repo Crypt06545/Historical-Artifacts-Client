@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import LoadingSpinner from "../components/Loader";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -47,16 +48,13 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // onAuthStateChange
+  // Track authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("CurrentUser-->", currentUser);
-      setLoading(false);
+      setLoading(false); // Firebase auth initialization complete
     });
-    return () => {
-      return unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {
@@ -72,7 +70,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>
+      {loading ? <LoadingSpinner /> : children}
+    </AuthContext.Provider>
   );
 };
 

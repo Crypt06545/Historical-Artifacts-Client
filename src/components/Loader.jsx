@@ -1,6 +1,6 @@
 const LoadingSpinner = () => {
     return (
-      <div className="flex items-center justify-center w-full min-h-[calc(100vh-305px)] bg-[#1F1D1D]">
+      <div className="flex items-center justify-center w-full min-h-screen bg-[#1F1D1D]">
         <div
           aria-label="Loading..."
           role="status"
