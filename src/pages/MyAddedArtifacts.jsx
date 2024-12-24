@@ -1,61 +1,96 @@
 import { useState, useEffect, useContext } from "react";
-import { FaEdit, FaTrashAlt, FaImage } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
+import Swal from "sweetalert2"; // For confirmation dialogs
+import toast from "react-hot-toast"; // For notifications
 import { AuthContext } from "../provider/AuthProvider";
-import LoadingSpinner from "../components/Loader"; // Importing the already existing loader
+import LoadingSpinner from "../components/Loader";
 import { Link } from "react-router-dom";
 
 const MyAddedArtifacts = () => {
-  const { user } = useContext(AuthContext); // Access the logged-in user data
-  const [artifacts, setArtifacts] = useState([]); // State to store fetched artifacts
-  const [loading, setLoading] = useState(true); // State to handle loading
-  const [error, setError] = useState(null); // State to handle errors
+  const { user } = useContext(AuthContext);
+  const [artifacts, setArtifacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Fetch artifacts when the component mounts
   useEffect(() => {
     const fetchArtifacts = async () => {
       if (user?.email) {
-        // Check if user is logged in and has email
         try {
           const response = await axios.get(
-            `${import.meta.env.VITE_API_BASE_URL}/my-add-artifact/${user.email}`
+            `${import.meta.env.VITE_API_BASE_URL}/my-add-artifact/${
+              user?.email
+            }`
           );
-          if (response.data.length === 0) {
-            setArtifacts([]); // No artifacts found
-          } else {
-            setArtifacts(response.data); // Set the fetched artifacts to state
-          }
-          setLoading(false);
+          setArtifacts(response.data); // Update artifacts (even if empty)
         } catch (err) {
-          setError("Failed to fetch artifacts.");
-          setLoading(false);
+          setError("Failed to fetch artifacts.",err);
+        } finally {
+          setLoading(false); // Loading ends regardless of success or error
         }
       }
     };
 
     fetchArtifacts();
-  }, [user?.email]); // Re-fetch if the email changes
+  }, [user?.email]);
+
+  // Handle Delete Artifact
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `${import.meta.env.VITE_API_BASE_URL}/rm-my-artifact/${id}`
+          );
+          if (response.data.deletedCount > 0) {
+            setArtifacts((prevArtifacts) =>
+              prevArtifacts.filter((artifact) => artifact._id !== id)
+            );
+            toast.success("Artifact deleted successfully!");
+          } else {
+            toast.error("Failed to delete the artifact.");
+          }
+        } catch (error) {
+          toast.error("An error occurred while deleting the artifact.",error);
+        }
+      } else {
+        toast.error("Deletion canceled.");
+      }
+    });
+  };
 
   // Loading state
   if (loading) {
-    return <LoadingSpinner />; // Show the existing loader while data is being fetched
+    return <LoadingSpinner />;
+  }
+
+  // If no artifacts found
+  if (!loading && artifacts.length === 0) {
+    return (
+      <div className="text-center min-h-screen flex justify-center items-center bg-[#1F1D1D]">
+        <p className="text-white text-xl">No data found</p>
+      </div>
+    );
   }
 
   // Error handling
   if (error) {
-    return <div>{error}</div>;
-  }
-
-  // If no artifacts found
-  if (artifacts.length === 0) {
-    return <div className="text-center text-[#D1B38A]">No Data Found</div>;
+    return <div className="text-center text-[#D1B38A]">{error}</div>;
   }
 
   return (
     <div className="bg-[#1F1D1D] min-h-screen py-10 md:px-6 px-2">
       <div className="overflow-x-auto bg-[#4A4746] p-6 rounded-xl shadow-lg">
         <table className="table w-full text-[#E0D9D1]">
-          {/* Table Header */}
           <thead className="text-[#D1B38A]">
             <tr className="border-b-2 border-[#D1B38A]">
               <th className="py-3 px-4">Image</th>
@@ -64,10 +99,8 @@ const MyAddedArtifacts = () => {
               <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
-
-          {/* Table Body */}
           <tbody>
-            {artifacts?.map((artifact) => (
+            {artifacts.map((artifact) => (
               <tr key={artifact._id} className="hover:bg-[#5D5453]">
                 <td className="py-3 px-4 text-center">
                   <img
@@ -87,10 +120,11 @@ const MyAddedArtifacts = () => {
                       <FaEdit size={20} />
                     </Link>
                   </button>
-                  <button className="text-[#D1B38A] hover:text-[#A9927D]">
-                    <Link to={`/detete/${artifact?._id}`}>
-                      <FaTrashAlt size={20} />
-                    </Link>
+                  <button
+                    onClick={() => handleDelete(artifact?._id)}
+                    className="text-[#D1B38A] hover:text-[#A9927D]"
+                  >
+                    <FaTrashAlt size={20} />
                   </button>
                 </td>
               </tr>

@@ -4,8 +4,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const UpdateArtifact = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { id } = useParams(); // Get artifact ID from the route
 
@@ -67,9 +69,15 @@ const UpdateArtifact = () => {
             artifact
           )
           .then((response) => {
-            console.log("Artifact updated successfully:", response.data);
+            // console.log("Artifact updated successfully:", response.data);
             toast.success("Artifact updated successfully!");
-            Swal.fire("Updated!", "The artifact has been updated.", "success");
+            Swal.fire(
+              "Updated!",
+              "The artifact has been updated.",
+              "success"
+            ).then(() => {
+              navigate("/all-artifacts"); // Navigate to the desired page
+            });
           })
           .catch((error) => {
             console.error("Error updating artifact:", error);
@@ -96,7 +104,7 @@ const UpdateArtifact = () => {
               <input
                 type="text"
                 name="artifactName"
-                value={artifact.artifactName}
+                defaultValue={artifact?.artifactName}
                 onChange={handleInputChange}
                 required
                 placeholder="Enter artifact name"
@@ -110,7 +118,7 @@ const UpdateArtifact = () => {
               <input
                 type="url"
                 name="artifactImage"
-                value={artifact.artifactImage}
+                defaultValue={artifact?.artifactImage}
                 onChange={handleInputChange}
                 required
                 placeholder="Enter image URL"
@@ -126,7 +134,7 @@ const UpdateArtifact = () => {
               </label>
               <select
                 name="artifactType"
-                value={artifact.artifactType}
+                defaultValue={artifact?.artifactType}
                 onChange={handleInputChange}
                 required
                 className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
@@ -135,7 +143,8 @@ const UpdateArtifact = () => {
                 <option value="Weapons">Weapons</option>
                 <option value="Documents">Documents</option>
                 <option value="Writings">Writings</option>
-                <option value="Other">Other</option>
+                <option value="Burial Artifact">Burial Artifact</option>
+                <option value="Monument">Monument</option>
               </select>
             </div>
             <div className="space-y-1 text-sm">
@@ -147,7 +156,7 @@ const UpdateArtifact = () => {
               </label>
               <textarea
                 name="historicalContext"
-                value={artifact.historicalContext}
+                defaultValue={artifact?.historicalContext}
                 onChange={handleInputChange}
                 required
                 rows="3"
@@ -165,7 +174,7 @@ const UpdateArtifact = () => {
               <input
                 type="text"
                 name="createdAt"
-                value={artifact.createdAt}
+                defaultValue={artifact?.createdAt}
                 onChange={handleInputChange}
                 required
                 placeholder="e.g., 100 BC"
@@ -179,7 +188,7 @@ const UpdateArtifact = () => {
               <input
                 type="text"
                 name="discoveredAt"
-                value={artifact.discoveredAt}
+                defaultValue={artifact?.discoveredAt}
                 onChange={handleInputChange}
                 required
                 placeholder="e.g., 1799"
@@ -196,7 +205,7 @@ const UpdateArtifact = () => {
               <input
                 type="text"
                 name="discoveredBy"
-                value={artifact.discoveredBy}
+                defaultValue={artifact?.discoveredBy}
                 onChange={handleInputChange}
                 required
                 placeholder="Enter discoverer's name"
@@ -210,7 +219,7 @@ const UpdateArtifact = () => {
               <input
                 type="text"
                 name="presentLocation"
-                value={artifact.presentLocation}
+                defaultValue={artifact?.presentLocation}
                 onChange={handleInputChange}
                 required
                 placeholder="Enter present location"

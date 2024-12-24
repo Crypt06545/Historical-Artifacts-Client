@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const AddArtifact = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
+  const navigate = useNavigate();
 
   // console.log(user?.email);
 
@@ -18,6 +20,7 @@ const AddArtifact = () => {
     discoveredBy: "",
     presentLocation: "",
     userInfo: user?.email,
+    isLiked: false,
     createdby: {
       displayName: user?.displayName || "Unknown User",
       email: user?.email || "No Email",
@@ -41,7 +44,8 @@ const AddArtifact = () => {
       .then((response) => {
         // Handle the successful response
         console.log("Artifact added successfully:", response.data);
-        toast.success("Artifact added successfully!"); // Display a success message
+        toast.success("Artifact added successfully!"); // Show the success toast
+        navigate("/all-artifacts"); // Navigate to the desired page
       })
       .catch((error) => {
         // Handle any errors
@@ -106,7 +110,8 @@ const AddArtifact = () => {
                 <option value="Weapons">Weapons</option>
                 <option value="Documents">Documents</option>
                 <option value="Writings">Writings</option>
-                <option value="Other">Other</option>
+                <option value="Burial Artifact">Burial Artifact</option>
+                <option value="Monument">Monument</option>
               </select>
             </div>
             <div className="space-y-1 text-sm">

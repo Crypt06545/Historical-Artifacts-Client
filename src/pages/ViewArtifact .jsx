@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa"; // Importing the heart icon from react-icons
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 import LoadingSpinner from "../components/Loader";
 
 const ViewArtifact = () => {
   const { id } = useParams();
-  console.log(id);
+  const navigate = useNavigate();
 
   const [artifact, setArtifact] = useState(null);
   const [liked, setLiked] = useState(false);
@@ -22,10 +23,11 @@ const ViewArtifact = () => {
         );
         console.log(response.data);
         setArtifact(response.data);
-        // Store the artifact data in state
+        // Set initial like state based on the artifact data
+        setLiked(response.data.isLiked); // Set liked based on artifact's isLiked
         setLoading(false);
       } catch (err) {
-        setError("Failed to load artifact details", err);
+        setError("Failed to load artifact details");
         setLoading(false);
       }
     };
@@ -33,8 +35,22 @@ const ViewArtifact = () => {
     fetchArtifactDetails();
   }, [id]); // Re-run the effect when the ID changes
 
-  const toggleLike = () => {
-    setLiked(!liked); // Toggle the like state when clicked
+  const toggleLike = async () => {
+    const newLikeState = !liked; // Toggle the like state
+    setLiked(newLikeState); // Update local state
+
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_BASE_URL}/update-artifact-like/${id}`,
+        { isLiked: newLikeState }
+      );
+      toast.success(
+        newLikeState ? "You liked this artifact." : "You unliked this artifact."
+      );
+    } catch (error) {
+      toast.error("Error updating like status. Please try again.");
+      console.error("Error updating like status:", error);
+    }
   };
 
   // Render loading state using LoadingSpinner or error message
@@ -127,7 +143,10 @@ const ViewArtifact = () => {
 
         {/* Back Button */}
         <div className="flex justify-center">
-          <button className="block w-1/3 p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]">
+          <button
+            onClick={() => navigate("/all-artifacts")}
+            className="block w-1/3 p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]"
+          >
             Back to Artifacts
           </button>
         </div>

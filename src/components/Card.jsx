@@ -6,7 +6,6 @@ const Card = ({ artifact }) => {
   const navigate = useNavigate();
   // console.log(artifact);
 
-
   const handleDetails = (id) => {
     navigate(`/view-artifact-details/${id}`);
   };
@@ -18,7 +17,7 @@ const Card = ({ artifact }) => {
     // userInfo,
     createdby,
     react,
-    _id
+    _id,
   } = artifact;
 
   return (
@@ -51,19 +50,17 @@ const Card = ({ artifact }) => {
         {/* Artifact Image & Details */}
         <div>
           <img
-            src={
-              artifactImage ||
-              "https://source.unsplash.com/random/100x100/?artifact"
-            }
-            alt={artifactName || "Artifact"}
+            src={artifactImage}
+            alt={artifactName}
             className="object-cover w-full mb-4 h-60 sm:h-96"
           />
           <h2 className="mb-1 text-xl font-semibold text-[#E0D9D1]">
-            {artifactName || "Artifact Name"}
+            {artifactName}
           </h2>
           <p className="text-sm text-[#cfbaa2]">
-            {historicalContext ||
-              "No historical context available for this artifact."}
+            {historicalContext
+              ? historicalContext.split(" ").slice(0, 7).join(" ") + "..."
+              : ""}
           </p>
         </div>
 
@@ -75,8 +72,11 @@ const Card = ({ artifact }) => {
               <span className="text-[#A9927D]">{react}</span>
             </div>
           </div>
-          <button onClick={() => handleDetails(_id)} className="px-3 py-2 border rounded-md bg-[#393738] hover:bg-[#D99578]">
-              View Details
+          <button
+            onClick={() => handleDetails(_id)}
+            className="px-3 py-2 border rounded-md bg-[#393738] hover:bg-[#D99578]"
+          >
+            View Details
           </button>
         </div>
       </div>
