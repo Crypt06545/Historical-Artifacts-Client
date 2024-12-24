@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa"; // Importing the heart icon from react-icons
+import { FaHeart, FaRegCommentAlt } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../components/Loader";
+import CommentModal from "../components/CommentModal"; // Import CommentModal
 
 const ViewArtifact = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const ViewArtifact = () => {
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false); // State for modal visibility
 
   // Fetch the artifact details on component mount
   useEffect(() => {
@@ -21,7 +23,6 @@ const ViewArtifact = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/view-artifact-details/${id}`
         );
-        // console.log(response.data);
         setArtifact(response.data);
         setLiked(response.data.isLiked);
         setLoading(false);
@@ -50,6 +51,14 @@ const ViewArtifact = () => {
       toast.error("Error updating like status. Please try again.");
       console.error("Error updating like status:", error);
     }
+  };
+
+  const openCommentModal = () => {
+    setIsCommentModalOpen(true); // Open the comment modal
+  };
+
+  const closeCommentModal = () => {
+    setIsCommentModalOpen(false); // Close the comment modal
   };
 
   // Render loading state using LoadingSpinner or error message
@@ -124,20 +133,37 @@ const ViewArtifact = () => {
           />
         </div>
 
-        {/* Like Button */}
-        <div className="flex justify-center space-x-4">
-          <button
-            onClick={toggleLike}
-            className={`p-3 rounded-full ${
-              liked ? "bg-[#D1B38A]" : "bg-[#5D5453]"
-            } text-[#1F1D1D] hover:bg-[#D1B38A]`}
-          >
-            <FaHeart
-              className={`w-6 h-6 ${
-                liked ? "text-[#A9927D]" : "text-[#E0D9D1]"
-              }`}
-            />
-          </button>
+        {/* Like and Comment Count Section */}
+        <div className="flex justify-center space-x-4 items-center">
+          {/* React Count */}
+          <div className="relative flex items-center justify-center">
+            <span className="absolute top-0 right-0 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
+              {artifact?.react || 0} {/* Default to 0 if no react */}
+            </span>
+            <button
+              onClick={toggleLike}
+              className={`p-2 rounded-full ${
+                liked ? "bg-[#D1B38A]" : "bg-[#5D5453]"
+              } text-[#1F1D1D] hover:bg-[#D1B38A]`}
+            >
+              <FaHeart
+                className={`w-6 h-6 ${liked ? "text-[#A9927D]" : "text-[#E0D9D1]"}`}
+              />
+            </button>
+          </div>
+
+          {/* Comment Count */}
+          <div className="relative flex items-center justify-center">
+            <span className="absolute top-0 right-0 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
+              {artifact?.commentsCount || 0} {/* Default to 0 if no comments */}
+            </span>
+            <button
+              onClick={openCommentModal}
+              className="p-2 rounded-full bg-[#5D5453] text-[#1F1D1D] hover:bg-[#D1B38A]"
+            >
+              <FaRegCommentAlt className="w-6 h-6 text-[#E0D9D1]" />
+            </button>
+          </div>
         </div>
 
         {/* Back Button */}
@@ -150,6 +176,11 @@ const ViewArtifact = () => {
           </button>
         </div>
       </div>
+
+      {/* Comment Modal */}
+      {isCommentModalOpen && (
+        <CommentModal artifactId={id} closeModal={closeCommentModal} />
+      )}
     </div>
   );
 };

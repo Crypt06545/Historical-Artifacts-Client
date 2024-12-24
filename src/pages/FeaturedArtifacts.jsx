@@ -22,7 +22,7 @@ const FeaturedArtifacts = () => {
         setArtifacts(sortedArtifacts);
         setLoading(false);
       } catch (err) {
-        setError("Failed to load artifacts");
+        setError("Failed to load artifacts",err);
         setLoading(false);
       }
     };
@@ -66,7 +66,7 @@ const FeaturedArtifacts = () => {
         <div className="m-5 text-center">
         <button
             onClick={() => navigate("/all-artifacts")}
-            className="text-white transition-colors duration-300 transform bg-[#9C6F42] rounded-md lg:w-auto hover:bg-[#7B5A36] focus:outline-none focus:bg-[#7B5A36] px-5 py-2 rounded-lg font-semibold"
+            className="text-white transition-colors duration-300 transform bg-[#9C6F42]  lg:w-auto hover:bg-[#7B5A36] focus:outline-none focus:bg-[#7B5A36] px-5 py-2 rounded-lg font-semibold"
           >
             See All
           </button>
