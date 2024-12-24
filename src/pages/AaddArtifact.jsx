@@ -21,6 +21,9 @@ const AddArtifact = () => {
     presentLocation: "",
     userInfo: user?.email,
     isLiked: false,
+    liked_By:{
+      email:''
+    },
     createdby: {
       displayName: user?.displayName || "Unknown User",
       email: user?.email || "No Email",
