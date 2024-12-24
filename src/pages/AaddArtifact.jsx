@@ -20,9 +20,9 @@ const AddArtifact = () => {
     discoveredBy: "",
     presentLocation: "",
     userInfo: user?.email,
-    isLiked: false,
-    liked_By:{
-      email:''
+    comment: [],
+    liked_By: {
+      email: "",
     },
     createdby: {
       displayName: user?.displayName || "Unknown User",
@@ -46,7 +46,7 @@ const AddArtifact = () => {
       .post(`${import.meta.env.VITE_API_BASE_URL}/add-artifact`, addArtifacts)
       .then((response) => {
         // Handle the successful response
-        console.log("Artifact added successfully:", response.data);
+        // console.log("Artifact added successfully:", response.data);
         toast.success("Artifact added successfully!"); // Show the success toast
         navigate("/all-artifacts"); // Navigate to the desired page
       })

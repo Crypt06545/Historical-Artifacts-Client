@@ -137,7 +137,7 @@ const ViewArtifact = () => {
         <div className="flex justify-center space-x-4 items-center">
           {/* React Count */}
           <div className="relative flex items-center justify-center">
-            <span className="absolute top-0 right-0 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
+            <span className="absolute -top-3 -right-2 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
               {artifact?.react || 0} {/* Default to 0 if no react */}
             </span>
             <button
@@ -154,7 +154,7 @@ const ViewArtifact = () => {
 
           {/* Comment Count */}
           <div className="relative flex items-center justify-center">
-            <span className="absolute top-0 right-0 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
+            <span className="absolute  -top-3 -right-2 text-xs sm:text-xs font-semibold rounded-full bg-[#D1B38A] text-[#1F1D1D] px-2 py-1">
               {artifact?.commentsCount || 0} {/* Default to 0 if no comments */}
             </span>
             <button

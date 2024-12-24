@@ -114,6 +114,7 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#403D3D] rounded-box w-52 text-[#D99578]"
             >
+              <li className="text-center text-white">{user?.displayName}</li>
               <li>
                 <Link to="/my-add-artifact">My Artifacts</Link>
               </li>
