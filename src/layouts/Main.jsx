@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import LoadingSpinner from '../components/Loader'
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+// import LoadingSpinner from '../components/Loader'
 
 const Main = () => {
   return (
@@ -9,14 +9,14 @@ const Main = () => {
       {/* Navbar */}
       <Navbar />
       {/* Outlet */}
-      <div className='min-h-[calc(100vh-306px)]'>
+      <div className="min-h-[calc(100vh-306px)]">
         <Outlet />
       </div>
       {/* Footer */}
       {/* <LoadingSpinner/> */}
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

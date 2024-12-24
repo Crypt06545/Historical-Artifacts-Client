@@ -21,19 +21,18 @@ const ViewArtifact = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/view-artifact-details/${id}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setArtifact(response.data);
-        // Set initial like state based on the artifact data
-        setLiked(response.data.isLiked); // Set liked based on artifact's isLiked
+        setLiked(response.data.isLiked);
         setLoading(false);
       } catch (err) {
-        setError("Failed to load artifact details");
+        setError("Failed to load artifact details", err);
         setLoading(false);
       }
     };
 
     fetchArtifactDetails();
-  }, [id]); // Re-run the effect when the ID changes
+  }, [id]);
 
   const toggleLike = async () => {
     const newLikeState = !liked; // Toggle the like state
@@ -55,11 +54,11 @@ const ViewArtifact = () => {
 
   // Render loading state using LoadingSpinner or error message
   if (loading) {
-    return <LoadingSpinner />; // Show the loading spinner while data is being fetched
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return <div>{error}</div>; // Show error message if there is an error
+    return <div>{error}</div>;
   }
 
   return (
