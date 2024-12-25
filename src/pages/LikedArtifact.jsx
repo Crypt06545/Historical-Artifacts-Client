@@ -3,18 +3,22 @@ import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import Card from "../components/Card";
 import LoadingSpinner from "../components/Loader";
+import { Helmet } from "react-helmet-async";
 
 const LikedArtifact = () => {
-  const { user } = useContext(AuthContext); // Get user email from context
-  const [likedArtifactIds, setLikedArtifactIds] = useState([]); // State to store liked artifact IDs
-  const [allArtifacts, setAllArtifacts] = useState([]); // State to store all artifacts
-  const [loading, setLoading] = useState(true); // Loading state
+  const { user } = useContext(AuthContext);
+  const [likedArtifactIds, setLikedArtifactIds] = useState([]);
+  const [allArtifacts, setAllArtifacts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
       // Fetch liked artifact IDs
       axios
-        .get(`${import.meta.env.VITE_API_BASE_URL}/liked-artifacts/${user.email}`)
+        .get(
+          `${import.meta.env.VITE_API_BASE_URL}/liked-artifacts/${user.email}`,
+          { withCredentials: true }
+        )
         .then((response) => {
           setLikedArtifactIds(response.data.artifactIds); // Store liked artifact IDs
         })
@@ -47,20 +51,27 @@ const LikedArtifact = () => {
   }
 
   return (
-    <div className="bg-[#1F1D1D]">
-      {/* Title */}
-      <h1 className="text-white text-3xl pt-8 text-center">Liked Artifacts</h1>
+    <div>
+      <Helmet>
+        <title>EGYPT - Liked Artifact</title>
+      </Helmet>
+      <div className="bg-[#1F1D1D]">
+        {/* Title */}
+        <h1 className="text-white text-3xl pt-8 text-center">
+          Liked Artifacts
+        </h1>
 
-      {/* Liked Artifacts Cards */}
-      <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 py-10 gap-5">
-        {/* Render a card for each artifact that matches the liked artifact IDs */}
-        {allArtifacts.map((artifact) => {
-          const isLiked = likedArtifactIds.includes(artifact._id);
-          if (isLiked) {
-            return <Card key={artifact._id} artifact={artifact} />;
-          }
-          return null; // If not matched, return null
-        })}
+        {/* Liked Artifacts Cards */}
+        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 py-10 gap-5">
+          {/* Render a card for each artifact that matches the liked artifact IDs */}
+          {allArtifacts.map((artifact) => {
+            const isLiked = likedArtifactIds.includes(artifact._id);
+            if (isLiked) {
+              return <Card key={artifact._id} artifact={artifact} />;
+            }
+            return null; // If not matched, return null
+          })}
+        </div>
       </div>
     </div>
   );

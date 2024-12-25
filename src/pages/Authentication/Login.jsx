@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const from = location?.state || "/";
+  const from = location?.state || "/";
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(""); // Initialize email state
   const [password, setPassword] = useState(""); // Initialize password state
@@ -24,14 +24,16 @@ const Login = () => {
   };
 
   // Google Signin
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((res) => {
-        setUser(res.user);
-        navigate(location?.state ? location.state : "/");
-        toast.success("Logged in with Google!");
-      })
-      .catch(() => toast.error("Google login failed. Please try again."));
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+
+      toast.success("Signin Successful");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
   };
 
   // Login submission

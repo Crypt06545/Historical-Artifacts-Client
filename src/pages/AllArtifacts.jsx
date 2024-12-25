@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card";
 import LoadingSpinner from "../components/Loader";
+import { Helmet } from "react-helmet-async";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
@@ -36,6 +37,7 @@ const AllArtifacts = () => {
         `${import.meta.env.VITE_API_BASE_URL}/search-artifacts`,
         {
           params: { name: query },
+          // withCredentials: true,
         }
       );
       setArtifacts(response.data);
@@ -74,6 +76,9 @@ const AllArtifacts = () => {
 
   return (
     <div className="bg-[#1F1D1D]">
+      <Helmet>
+        <title>EGYPT - All Artifacts</title>
+      </Helmet>
       {/* Search bar */}
       <div className="flex justify-end items-center w-full pt-5 px-4">
         <input
