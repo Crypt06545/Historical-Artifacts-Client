@@ -7,9 +7,9 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-// import LoadingSpinner from "../components/Loader";
 
 export const AuthContext = createContext();
 
@@ -51,6 +51,15 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // Update user profile
+  const updateUserProfile = (name, photo) => {
+    const user = auth.currentUser;
+    if (user) {
+      return updateProfile(user, { displayName: name, photoURL: photo });
+    }
+    return Promise.reject("No user found to update");
+  };
+
   // Observe user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -69,14 +78,12 @@ const AuthProvider = ({ children }) => {
     logIn,
     googleSignIn,
     logOut,
+    updateUserProfile, // Make sure to expose this function
     loading,
   };
 
   return (
-    <AuthContext.Provider value={userInfo}>
-      {/* {loading ? <LoadingSpinner /> : children} */}
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
   );
 };
 

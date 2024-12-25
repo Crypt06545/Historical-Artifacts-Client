@@ -3,7 +3,7 @@ import React from 'react'
 const LikedArtifact = () => {
   return (
     <div>
-      This is liked aftiface
+      `${import.meta.env.VITE_API_BASE_URL}/liked-artifacts/${email}`
     </div>
   )
 }

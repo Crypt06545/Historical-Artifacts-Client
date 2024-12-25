@@ -63,7 +63,9 @@ const Login = () => {
     <div className="bg-[#1F1D1D] min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
         <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">Login</h1>
-        <form onSubmit={handleSubmit} className="space-y-6"> {/* Change to handleSubmit */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {" "}
+          {/* Change to handleSubmit */}
           <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block text-[#E0D9D1]">
               Email
@@ -101,7 +103,8 @@ const Login = () => {
               </button>
             </div>
             <div className="flex justify-end text-xs text-[#E0D9D1]">
-              <Link to="/forgot-password">Forgot Password?</Link> {/* Added Link to Forgot Password */}
+              <Link>Forgot Password?</Link>{" "}
+              {/* Added Link to Forgot Password */}
             </div>
           </div>
           <button className="block w-full p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]">

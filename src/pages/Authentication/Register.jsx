@@ -6,10 +6,9 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, setUser } =
+  const { googleSignIn, createNewUser, updateUserProfile, setUser } =
     useContext(AuthContext);
 
-  // sign up with email,pass others
   const handleSignUp = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,11 +16,22 @@ const Register = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const pass = form.password.value;
-    console.log({ email, pass, name, photo });
+
+    // Password validation regex
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    if (!passwordRegex.test(pass)) {
+      toast.error(
+        "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long."
+      );
+      return;
+    }
+
     try {
-      //2. User Registration
-      const result = await createUser(email, pass);
+      // 1. User Registration
+      const result = await createNewUser(email, pass);
       console.log(result);
+      // 2. Update user profile
       await updateUserProfile(name, photo);
       setUser({ ...result.user, photoURL: photo, displayName: name });
       toast.success("Signup Successful");
@@ -32,11 +42,9 @@ const Register = () => {
     }
   };
 
-  // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
-
+      await googleSignIn();
       toast.success("Signin Successful");
       navigate("/");
     } catch (err) {
@@ -131,7 +139,7 @@ const Register = () => {
 
         <div className="flex justify-center space-x-4">
           <button
-          onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             aria-label="Log in with Google"
             className="p-3 rounded-sm bg-[#D1B38A] hover:bg-[#A9927D]"
           >
@@ -146,10 +154,10 @@ const Register = () => {
           </button>
         </div>
 
-        <p className="text-xs text-center sm:px-6 text-[#E0D9D1]">
-          Already have an account?
-          <Link to="/login" className="underline text-[#D1B38A]">
-            Log In
+        <p className="mt-4 text-center text-sm text-[#E0D9D1]">
+          Already have an account?{" "}
+          <Link to="/login" className="text-[#A9927D] hover:text-[#D1B38A]">
+            Login
           </Link>
         </p>
       </div>

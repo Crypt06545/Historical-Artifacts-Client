@@ -5,7 +5,7 @@ import LoadingSpinner from "../components/Loader";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // For search input
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,10 +35,10 @@ const AllArtifacts = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/search-artifacts`,
         {
-          params: { name: query }, // Send the search query to the backend
+          params: { name: query },
         }
       );
-      setArtifacts(response.data); // Update the state with the filtered artifacts
+      setArtifacts(response.data);
     } catch (err) {
       setError("Failed to search artifacts");
     } finally {
@@ -80,8 +80,8 @@ const AllArtifacts = () => {
           type="text"
           placeholder="Search artifacts..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search query
-          className="w-48 px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]" // Smaller width
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-48 px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
         />
         <button
           onClick={handleSearch}

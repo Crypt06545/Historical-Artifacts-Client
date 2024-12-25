@@ -61,16 +61,6 @@ const Navbar = () => {
               Add Artifacts
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/my-add-artifact"
-              className={({ isActive }) =>
-                isActive ? "text-[#D99578]" : "text-white"
-              }
-            >
-              My Artifacts
-            </NavLink>
-          </li>
           {/* Login Button for Small Screens */}
           {!user && (
             <li className="lg:hidden">
@@ -97,19 +87,26 @@ const Navbar = () => {
         )}
         {user && (
           <div className="dropdown dropdown-end m-4">
+            {/* Tooltip for the user photo */}
             <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar flex items-center"
+              className="tooltip tooltip-bottom"
+              data-tip={user?.displayName}
             >
-              <div className="w-10 rounded-full">
-                <img
-                  referrerPolicy="no-referrer"
-                  alt="User Profile"
-                  src={user?.photoURL}
-                />
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar flex items-center"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    referrerPolicy="no-referrer"
+                    alt="User Profile"
+                    src={user?.photoURL}
+                  />
+                </div>
               </div>
             </div>
+
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#403D3D] rounded-box w-52 text-[#D99578]"

@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaHeart, FaRegCommentAlt } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../components/Loader";
-import CommentModal from "../components/CommentModal"; // Import CommentModal
+import CommentModal from "../components/CommentModal";
+import { AuthContext } from "../provider/AuthProvider";
+
 const ViewArtifact = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -35,18 +38,25 @@ const ViewArtifact = () => {
   }, [id]);
 
   const toggleLike = async () => {
-    const newLikeState = !liked; // Toggle the like state
-    setLiked(newLikeState); // Update local state
+    const newLikeState = !liked;
+    setLiked(newLikeState);
 
     try {
       await axios.patch(
         `${import.meta.env.VITE_API_BASE_URL}/update-artifact-like/${id}`,
-        { isLiked: newLikeState }
+        {
+          isLiked: newLikeState,
+          details:{},
+          likedUser: {
+            email: user?.email,
+            photoUrl: user?.photoURL,
+          },
+        }
       );
       toast.success(
         newLikeState ? "You liked this artifact." : "You unliked this artifact."
-      )
-      navigate('/all-artifacts')
+      );
+      // navigate("/all-artifacts");
     } catch (error) {
       toast.error("Error updating like status. Please try again.");
       console.error("Error updating like status:", error);
@@ -147,7 +157,9 @@ const ViewArtifact = () => {
               } text-[#1F1D1D] hover:bg-[#D1B38A]`}
             >
               <FaHeart
-                className={`w-6 h-6 ${liked ? "text-[#A9927D]" : "text-[#E0D9D1]"}`}
+                className={`w-6 h-6 ${
+                  liked ? "text-[#A9927D]" : "text-[#E0D9D1]"
+                }`}
               />
             </button>
           </div>
