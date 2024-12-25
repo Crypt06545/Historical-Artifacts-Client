@@ -25,6 +25,7 @@ const ViewArtifact = () => {
         );
         setArtifact(response.data);
         setLiked(response.data.isLiked);
+        console.log(response.data.liked_By);
         setLoading(false);
       } catch (err) {
         setError("Failed to load artifact details", err);
@@ -45,14 +46,12 @@ const ViewArtifact = () => {
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_API_BASE_URL}/update-artifact-like/${id}`,
-        { userEmail, liked: newLikeState } // Send only userEmail and liked
+        { userEmail, liked: newLikeState, id }
       );
 
-      // If the like was successfully toggled, update the react count
       if (response.data.success) {
         toast.success(response.data.message);
 
-        // Update the artifact's react count based on the new like state
         setArtifact((prevArtifact) => ({
           ...prevArtifact,
           react: prevArtifact.react + (newLikeState ? 1 : -1),
@@ -66,14 +65,13 @@ const ViewArtifact = () => {
   };
 
   const openCommentModal = () => {
-    setIsCommentModalOpen(true); // Open the comment modal
+    setIsCommentModalOpen(true);
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false); // Close the comment modal
   };
 
-  // Render loading state using LoadingSpinner or error message
   if (loading) {
     return <LoadingSpinner />;
   }
