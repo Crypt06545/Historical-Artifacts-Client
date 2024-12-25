@@ -4,14 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../components/Loader";
-import CommentModal from "../components/CommentModal";
+import CommentModal from "../components/CommentModal"; // Import CommentModal
 import { AuthContext } from "../provider/AuthProvider";
-
 const ViewArtifact = () => {
-  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const { user } = useContext(AuthContext);
   const [artifact, setArtifact] = useState(null);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -38,28 +36,32 @@ const ViewArtifact = () => {
   }, [id]);
 
   const toggleLike = async () => {
-    const newLikeState = !liked;
-    setLiked(newLikeState);
+    const newLikeState = !liked; // Toggle the like state
+    setLiked(newLikeState); // Update local state
+
+    // Get user info from AuthContext
+    const userEmail = user?.email;
 
     try {
-      await axios.patch(
+      const response = await axios.patch(
         `${import.meta.env.VITE_API_BASE_URL}/update-artifact-like/${id}`,
-        {
-          isLiked: newLikeState,
-          details:{},
-          likedUser: {
-            email: user?.email,
-            photoUrl: user?.photoURL,
-          },
-        }
+        { userEmail, liked: newLikeState } // Send only userEmail and liked
       );
-      toast.success(
-        newLikeState ? "You liked this artifact." : "You unliked this artifact."
-      );
-      // navigate("/all-artifacts");
-    } catch (error) {
-      toast.error("Error updating like status. Please try again.");
-      console.error("Error updating like status:", error);
+
+      // If the like was successfully toggled, update the react count
+      if (response.data.success) {
+        toast.success(response.data.message);
+
+        // Update the artifact's react count based on the new like state
+        setArtifact((prevArtifact) => ({
+          ...prevArtifact,
+          react: prevArtifact.react + (newLikeState ? 1 : -1),
+        }));
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (err) {
+      toast.error("Failed to toggle like");
     }
   };
 

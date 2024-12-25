@@ -20,10 +20,7 @@ const AddArtifact = () => {
     discoveredBy: "",
     presentLocation: "",
     userInfo: user?.email,
-    comment: [],
-    liked_By: {
-      email: "",
-    },
+    liked_By: [],
     createdby: {
       displayName: user?.displayName || "Unknown User",
       email: user?.email || "No Email",
