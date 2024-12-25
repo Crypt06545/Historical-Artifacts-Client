@@ -5,25 +5,56 @@ import LoadingSpinner from "../components/Loader";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // For search input
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchArtifacts = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/all-artifacts`
-        );
-        setArtifacts(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load artifacts", err);
-        setLoading(false);
-      }
-    };
+  // Function to fetch all artifacts
+  const fetchAllArtifacts = async () => {
+    setLoading(true);
+    setError(null);
 
-    fetchArtifacts();
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/all-artifacts`
+      );
+      setArtifacts(response.data);
+    } catch (err) {
+      setError("Failed to load artifacts");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Function to fetch artifacts based on search
+  const fetchArtifactsBySearch = async (query = "") => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/search-artifacts`,
+        {
+          params: { name: query }, // Send the search query to the backend
+        }
+      );
+      setArtifacts(response.data); // Update the state with the filtered artifacts
+    } catch (err) {
+      setError("Failed to search artifacts");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch all artifacts on initial render
+  useEffect(() => {
+    fetchAllArtifacts();
   }, []);
+
+  // Handle search
+  const handleSearch = () => {
+    fetchArtifactsBySearch(searchQuery);
+  };
 
   if (loading)
     return (
@@ -43,6 +74,24 @@ const AllArtifacts = () => {
 
   return (
     <div className="bg-[#1F1D1D]">
+      {/* Search bar */}
+      <div className="flex justify-end items-center w-full pt-5 px-4">
+        <input
+          type="text"
+          placeholder="Search artifacts..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+          className="w-48 px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]" // Smaller width
+        />
+        <button
+          onClick={handleSearch}
+          className="ml-3 p-3 bg-[#A9927D] text-[#1F1D1D] rounded-md hover:bg-[#D1B38A]"
+        >
+          Search
+        </button>
+      </div>
+
+      {/* Artifact cards */}
       <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-5">
         {artifacts.map((artifact) => (
           <Card key={artifact._id} artifact={artifact} />

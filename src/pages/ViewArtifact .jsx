@@ -5,7 +5,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../components/Loader";
 import CommentModal from "../components/CommentModal"; // Import CommentModal
-
 const ViewArtifact = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -46,7 +45,8 @@ const ViewArtifact = () => {
       );
       toast.success(
         newLikeState ? "You liked this artifact." : "You unliked this artifact."
-      );
+      )
+      navigate('/all-artifacts')
     } catch (error) {
       toast.error("Error updating like status. Please try again.");
       console.error("Error updating like status:", error);
