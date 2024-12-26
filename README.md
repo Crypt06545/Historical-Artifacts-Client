@@ -1,8 +1,111 @@
-# React + Vite
+# Historical Artifacts Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌟 Project Overview  
+The **Historical Artifacts Tracker** is a web application designed to manage, explore, and contribute information about historical artifacts. Users can browse artifacts, view detailed information, add their own entries, and like their favorite artifacts. The application provides a user-friendly interface and secure authentication system to ensure a seamless experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Site  
+[Live Link](#)  
+
+---
+
+## 🎯 Key Features  
+- **Authentication System**: 
+  - Secure login and registration using email/password and social login (Google/GitHub).  
+  - Password validation with strong security checks.  
+  - Conditional navigation links and protected routes for private features.  
+
+- **Artifact Management**:  
+  - Add, update, and delete artifacts (logged-in users).  
+  - Like/unlike artifacts with database synchronization.  
+  - View personal artifacts and liked artifacts separately.  
+
+- **Dynamic UI**:  
+  - Fully responsive design for mobile, tablet, and desktop.  
+  - Attractive banner/slider and featured artifacts section.  
+  - Search functionality for artifacts by name.  
+
+- **Extras**:  
+  - Dynamic page titles for each route.  
+  - Meaningful 404 page for invalid routes.  
+  - Toast/SweetAlert notifications for all CRUD operations.
+  -  Users can leave comments on individual artifact pages to share their insights or feedback.
+  - Loading spinner for data-fetching states.  
+
+<!-- ---
+
+## 🖼️ Screenshots  
+**(Include screenshots of key pages, such as the Home page, Add Artifact page, Artifact Details page, etc.)** -->
+
+---
+
+## 🛠️ Technologies Used  
+- **Frontend**: React.js, Tailwind CSS, React Router  
+- **Backend**: Node.js, Express.js  
+- **Database**: MongoDB  
+- **Authentication**: Firebase 
+
+---
+
+
+## 📖 Installation & Usage  
+### Prerequisites  
+- Node.js  
+- MongoDB  
+- Firebase Account  
+
+### Client-Side Installation  
+1. Clone the repository:  
+   ```bash
+   git clone <client-repo-url>
+   ```
+2. Navigate to the client directory:  
+   ```bash
+   cd client
+   ```
+3. Install dependencies:  
+   ```bash
+   npm install
+   ```
+4. Configure `.env.local` for Firebase:  
+   ```env
+   VITE_FIREBASE_API_KEY=<your-api-key>
+   VITE_FIREBASE_AUTH_DOMAIN=<your-auth-domain>
+   ```
+5. Start the development server:  
+   ```bash
+   npm run dev
+   ```
+
+### Server-Side Installation  
+1. Clone the repository:  
+   ```bash
+   git clone <server-repo-url>
+   ```
+2. Navigate to the server directory:  
+   ```bash
+   cd server
+   ```
+3. Install dependencies:  
+   ```bash
+   npm install
+   ```
+4. Configure `.env` for MongoDB and JWT:  
+   ```env
+   MONGODB_URI=<your-mongodb-uri>
+   JWT_SECRET=<your-jwt-secret>
+   ```
+5. Start the server:  
+   ```bash
+   npm start
+   ```
+
+---
+
+
+
+
+
+## 📜 License  
+This project is licensed under the MIT License.
