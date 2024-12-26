@@ -72,6 +72,9 @@ const MyAddedArtifacts = () => {
 
   // Loading state
   if (loading) {
+    <Helmet>
+      <title>EGYPT - My Added Artifact</title>
+    </Helmet>;
     return <LoadingSpinner />;
   }
 
@@ -79,6 +82,9 @@ const MyAddedArtifacts = () => {
   if (!loading && artifacts.length === 0) {
     return (
       <div className="text-center min-h-screen flex justify-center items-center bg-[#1F1D1D]">
+        <Helmet>
+          <title>EGYPT - My Added Artifact</title>
+        </Helmet>
         <p className="text-white text-xl">No data found</p>
       </div>
     );
@@ -86,7 +92,14 @@ const MyAddedArtifacts = () => {
 
   // Error handling
   if (error) {
-    return <div className="text-center text-[#D1B38A]">{error}</div>;
+    return (
+      <div className="text-center text-[#D1B38A]">
+        <Helmet>
+          <title>EGYPT - My Added Artifact</title>
+        </Helmet>
+        {error}
+      </div>
+    );
   }
 
   return (

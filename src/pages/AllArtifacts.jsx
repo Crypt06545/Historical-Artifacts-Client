@@ -61,6 +61,9 @@ const AllArtifacts = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <Helmet>
+          <title>EGYPT - All Artifacts</title>
+        </Helmet>
         <LoadingSpinner />
       </div>
     );
@@ -70,6 +73,9 @@ const AllArtifacts = () => {
   if (artifacts.length === 0)
     return (
       <div className="flex justify-center items-center bg-[#1F1D1D] min-h-screen">
+        <Helmet>
+          <title>EGYPT - All Artifacts</title>
+        </Helmet>
         <p className="text-white text-xl">No data found</p>
       </div>
     );

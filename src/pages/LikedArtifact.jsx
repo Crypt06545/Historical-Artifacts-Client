@@ -45,32 +45,42 @@ const LikedArtifact = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
+        <Helmet>
+          <title>EGYPT - Liked Artifact</title>
+        </Helmet>
         <LoadingSpinner />
       </div>
     );
   }
 
+  const likedArtifacts = allArtifacts.filter((artifact) =>
+    likedArtifactIds.includes(artifact._id)
+  );
+
   return (
-    <div>
+    <div className="min-h-screen bg-[#1F1D1D]">
       <Helmet>
         <title>EGYPT - Liked Artifact</title>
       </Helmet>
-      <div className="bg-[#1F1D1D]">
+      <div className="">
         {/* Title */}
         <h1 className="text-white text-3xl pt-8 text-center">
           Liked Artifacts
         </h1>
 
-        {/* Liked Artifacts Cards */}
-        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 py-10 gap-5">
-          {/* Render a card for each artifact that matches the liked artifact IDs */}
-          {allArtifacts.map((artifact) => {
-            const isLiked = likedArtifactIds.includes(artifact._id);
-            if (isLiked) {
-              return <Card key={artifact._id} artifact={artifact} />;
-            }
-            return null; // If not matched, return null
-          })}
+        {/* Liked Artifacts Cards or No Data Message */}
+        <div className="w-11/12 mx-auto py-10">
+          {likedArtifacts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+              {likedArtifacts.map((artifact) => (
+                <Card key={artifact._id} artifact={artifact} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-white text-xl">
+              No Liked Artifacts Found
+            </div>
+          )}
         </div>
       </div>
     </div>
