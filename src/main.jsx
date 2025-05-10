@@ -6,13 +6,17 @@ import router from "./routes/Routes";
 import AuthProvider from "./provider/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import { HelmetProvider } from "react-helmet-async";
+import { HeroUIProvider } from "@heroui/react";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <HelmetProvider>
-        <RouterProvider router={router} />
-        <Toaster position="top-right" reverseOrder={false} />
-      </HelmetProvider>
+      <HeroUIProvider>
+        <HelmetProvider>
+          <RouterProvider router={router} />
+          <Toaster position="top-right" reverseOrder={false} />
+        </HelmetProvider>
+      </HeroUIProvider>
     </AuthProvider>
   </React.StrictMode>
 );

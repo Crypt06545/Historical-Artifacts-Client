@@ -1,31 +1,27 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react'
+// Carousel.jsx
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
+import { Autoplay, Pagination } from 'swiper/modules';
 
-// Import required modules
-import { Autoplay, Pagination } from 'swiper/modules'
+import bgimg1 from '../assets/images/slider-1.jpg';
+import bgimg2 from '../assets/images/slider-2.jpg';
+import bgimg3 from '../assets/images/slider-3.jpg';
 
-// Import images
-import bgimg1 from '../assets/images/slider-1.jpg'
-import bgimg2 from '../assets/images/slider-2.jpg'
-import bgimg3 from '../assets/images/slider-3.jpg'
-
-// Import Slide component
-import Slide from './Slide'
+import Slide from './Slide';
 
 export default function Carousel() {
   return (
-    <div className=''>
+    <div className="bg-[#171717]">
+      <div className='lg:w-[90%] mx-auto lg:p-4'>
+
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -33,18 +29,18 @@ export default function Carousel() {
           dynamicBullets: true,
         }}
         modules={[Autoplay, Pagination]}
-        className='mySwiper'
+        className="mySwiper"
       >
         <SwiperSlide>
           <Slide
             image={bgimg1}
-            text="Explore Ancient Civilizations through Artifacts"
+            text="Travel Through Time With Historical Items"
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
             image={bgimg2}
-            text="Discover the Stories Behind Ancient Artworks"
+            text="Explore Ancient Civilizations Through Artifacts"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -54,6 +50,7 @@ export default function Carousel() {
           />
         </SwiperSlide>
       </Swiper>
+      </div>
     </div>
-  )
+  );
 }

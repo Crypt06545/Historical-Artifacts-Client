@@ -1,3 +1,5 @@
+const { heroui } = require("@heroui/react");
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -6,5 +8,6 @@ export default {
       "font-family": "Mulish",
     },
   },
-  plugins: [require("daisyui")],
+    darkMode: "class",
+  plugins: [require("daisyui"),heroui()],
 };
