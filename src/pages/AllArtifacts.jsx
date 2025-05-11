@@ -103,7 +103,7 @@ const AllArtifacts = () => {
       </div>
 
       {/* Artifact cards */}
-      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-5">
+      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-10 gap-5">
         {artifacts.map((artifact) => (
           <Card key={artifact._id} artifact={artifact} />
         ))}

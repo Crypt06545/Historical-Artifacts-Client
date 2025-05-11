@@ -4,7 +4,6 @@ import { FaRegHeart } from "react-icons/fa";
 
 const Card = ({ artifact }) => {
   const navigate = useNavigate();
-  // console.log(artifact);
 
   const handleDetails = (id) => {
     navigate(`/view-artifact-details/${id}`);
@@ -14,67 +13,55 @@ const Card = ({ artifact }) => {
     artifactName,
     artifactImage,
     historicalContext,
-    // userInfo,
     createdby,
     react,
     _id,
   } = artifact;
 
   return (
-    <div>
-      <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md bg-[#4A4746] text-[#E0D9D1]">
-        {/* User Info */}
-        <div className="flex space-x-4">
+    <div className="w-full max-w-sm bg-[#3E3C3B] text-[#E0D9D1] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      {/* Image */}
+      <img
+        src={artifactImage}
+        alt={artifactName}
+        className="h-48 w-full object-cover"
+      />
+
+      <div className="p-4 space-y-3">
+        {/* Title */}
+        <h2 className="text-lg font-semibold truncate">{artifactName}</h2>
+
+        {/* Short Description */}
+        <p className="text-sm text-[#cfbaa2] leading-snug line-clamp-2">
+          {historicalContext
+            ? historicalContext.split(" ").slice(0, 12).join(" ") + "..."
+            : "No historical context available."}
+        </p>
+
+        {/* Creator Info */}
+        <div className="flex items-center gap-3 pt-1">
           <img
-            alt={createdby?.displayName || "User"}
             src={
               createdby?.photoURL ||
               "https://source.unsplash.com/100x100/?portrait"
             }
-            className="object-cover w-12 h-12 rounded-full shadow"
+            alt={createdby?.displayName || "User"}
+            className="w-8 h-8 rounded-full object-cover"
           />
-          <div className="flex flex-col space-y-1">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="text-sm font-semibold text-[#E0D9D1]"
-            >
-              {createdby?.displayName || "Unknown User"}
-            </a>
-            {/* <span className="text-xs text-gray-400">
-              {userInfo?.time || "Some time ago"}
-            </span> */}
-          </div>
+          <span className="text-sm text-[#E0D9D1]">
+            {createdby?.displayName || "Unknown User"}
+          </span>
         </div>
 
-        {/* Artifact Image & Details */}
-        <div>
-          <img
-            src={artifactImage}
-            alt={artifactName}
-            className="object-cover w-full mb-4 h-60 sm:h-96"
-          />
-          <h2 className="mb-1 text-xl font-semibold text-[#E0D9D1]">
-            {artifactName}
-          </h2>
-          <p className="text-sm text-[#cfbaa2]">
-            {historicalContext
-              ? historicalContext.split(" ").slice(0, 7).join(" ") + "..."
-              : ""}
-          </p>
-        </div>
-
-        {/* Footer Section */}
-        <div className="flex flex-wrap justify-between">
-          <div className="flex space-x-2 text-sm text-gray-400">
-            <div className="flex justify-center items-center gap-2">
-              <FaRegHeart className="w-4 h-full fill-current text-[#A9927D]" />
-              <span className="text-[#A9927D]">{react}</span>
-            </div>
+        {/* Footer: Likes + Button */}
+        <div className="flex items-center justify-between pt-2">
+          <div className="flex items-center gap-1 text-[#A9927D] text-sm">
+            <FaRegHeart className="w-4 h-4" />
+            <span>{react || 0}</span>
           </div>
           <button
             onClick={() => handleDetails(_id)}
-            className="px-3 py-2 border rounded-md bg-[#393738] hover:bg-[#D99578]"
+            className="px-3 py-1.5 text-sm rounded-md bg-[#5A5655] hover:bg-[#D99578] transition-colors"
           >
             View Details
           </button>

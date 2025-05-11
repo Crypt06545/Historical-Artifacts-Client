@@ -12,6 +12,8 @@ import {
 import app from "../firebase/firebase.config";
 import axios from "axios";
 
+import toast from 'react-hot-toast'
+
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -20,12 +22,19 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Sign up a user
-  const createNewUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password).finally(() => {
+const createNewUser = (email, password) => {
+  setLoading(true);
+  return createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      toast.success("Account created successfully!");
+    })
+    .catch((error) => {
+      toast.error(error.message || "Failed to create account. Please try again.");
+    })
+    .finally(() => {
       setLoading(false);
     });
-  };
+};
 
   // Log in a user
   const logIn = (email, password) => {
@@ -45,12 +54,19 @@ const AuthProvider = ({ children }) => {
   };
 
   // Log out a user
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth).finally(() => {
+const logOut = () => {
+  setLoading(true);
+  return signOut(auth)
+    .then(() => {
+      toast.success("Successfully logged out!");
+    })
+    .catch((error) => {
+      toast.error("Failed to log out. Please try again.");
+    })
+    .finally(() => {
       setLoading(false);
     });
-  };
+};
 
   // Update user profile
   const updateUserProfile = (name, photo) => {

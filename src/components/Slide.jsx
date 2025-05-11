@@ -1,15 +1,21 @@
-// Slide.jsx
 import { Button } from "@heroui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Slide({ image, text }) {
+  const navigate = useNavigate();
+  const handleGetStart = () => {
+    navigate('/all-artifacts');
+  };
+
+
   return (
     <div
       className="relative h-[60vh] min-h-[400px] w-full bg-cover bg-center flex items-center justify-start px-4 md:px-20"
-      style={{ 
+      style={{
         backgroundImage: `url(${image})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
       }}
     >
       {/* Overlay */}
@@ -20,10 +26,10 @@ export default function Slide({ image, text }) {
         {/* Icon and top line */}
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <img 
-              src="https://kitpro.site/lastoria/wp-content/uploads/sites/251/2024/06/3-768x768.png" 
-              alt="icon" 
-              className="w-6 h-6 object-contain" 
+            <img
+              src="https://kitpro.site/lastoria/wp-content/uploads/sites/251/2024/06/3-768x768.png"
+              alt="icon"
+              className="w-6 h-6 object-contain"
             />
           </div>
           <div className="font-semibold text-sm leading-tight">
@@ -39,13 +45,14 @@ export default function Slide({ image, text }) {
 
         {/* Buttons */}
         <div className="flex items-center gap-4">
-          <Button 
-            className="bg-white text-black hover:bg-gray-300 px-6 py-3" 
+          <Button
+            className="bg-white text-black hover:bg-gray-300"
             radius="full"
+            onClick={handleGetStart}
           >
             Get Started
           </Button>
-          <Button 
+          <Button
             className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center hover:bg-white hover:text-black transition"
             isIconOnly
           >
