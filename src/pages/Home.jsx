@@ -1,4 +1,5 @@
 import Carousel from "../components/Carousel";
+
 import Contact from "../components/Contact";
 import EducationalPrograms from "../components/Education";
 import FeatureSection from "../components/FeatureSection";
