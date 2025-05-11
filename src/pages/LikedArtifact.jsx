@@ -71,7 +71,7 @@ const LikedArtifact = () => {
         {/* Liked Artifacts Cards or No Data Message */}
         <div className="w-11/12 mx-auto py-10">
           {likedArtifacts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {likedArtifacts.map((artifact) => (
                 <Card key={artifact._id} artifact={artifact} />
               ))}
