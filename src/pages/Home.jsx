@@ -14,7 +14,7 @@ const Home = () => {
       <Collection />
       <FeaturedArtifacts />
       <EducationalPrograms />
-      <Contact />
+      {/* <Contact /> */}
     </div>
   );
 };

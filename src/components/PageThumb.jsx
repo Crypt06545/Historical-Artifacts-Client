@@ -13,7 +13,7 @@ const PageThumb = ({ heading }) => {
   }, []);
 
   return (
-    <div className="bg-[#121212] py-6 min-h-screen">
+    <div className="bg-[#302E2F] dark:bg-[#121212] py-6">
       <div className="w-[89%] mx-auto">
         <div
           className="relative rounded-xl overflow-hidden h-64 md:h-72 lg:h-80 flex items-center px-6 md:px-12"
@@ -25,12 +25,12 @@ const PageThumb = ({ heading }) => {
           }}
         >
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-70 dark:bg-opacity-50"></div>
 
           {/* Content */}
-          <div className="relative z-10 text-left text-[#e6d9c4]">
+          <div className="relative z-10 text-left text-white dark:text-[#e6d9c4]">
             <h2 className="info text-3xl md:text-4xl font-semibold">{heading}</h2>
-            <div className="mt-2 h-0.5 w-40 bg-[#e6d9c4]"></div>
+            <div className="mt-2 h-0.5 w-40 bg-white dark:bg-[#e6d9c4]"></div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@heroui/react";
 
 // Register plugin safely on client-side only
 if (typeof window !== "undefined") {
@@ -67,16 +68,16 @@ const EducationalPrograms = () => {
   }, []);
 
   return (
-    <section className="bg-[#2E2B2B] py-12 text-[#E0D9D1]">
+    <section className="bg-[#2C2A29] py-12 text-[#E0D9D1]">
       <div className="w-[89%] mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#A9927D] mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#D3C6A1] mb-10">
           Educational Programs & Workshops
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {programs.map((item, index) => (
             <div
               key={index}
-              className="education-card bg-[#3F3C3C] rounded-lg shadow-md hover:shadow-lg transition hover:scale-105 overflow-hidden"
+              className="education-card bg-[#4F4A47] rounded-lg shadow-md hover:shadow-lg transition hover:scale-105 overflow-hidden dark:bg-[#3A3532]"
             >
               <img
                 src={item.img}
@@ -84,18 +85,23 @@ const EducationalPrograms = () => {
                 className="w-full h-40 object-cover"
               />
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-[#A9927D] mb-1">
+                <h3 className="text-lg font-semibold text-[#D3C6A1] mb-1 dark:text-[#E0D9D1]">
                   {item.title}
                 </h3>
-                <p className="text-sm italic text-[#D1B38A] mb-2">
+                <p className="text-sm italic text-[#B0A59A] mb-2 dark:text-[#B8A18E]">
                   {item.desc}
                 </p>
-                <p className="text-xs text-[#A9927D] mb-3">
+                <p className="text-xs text-[#D3C6A1] mb-3 dark:text-[#E0D9D1]">
                   Dates: {item.date}
                 </p>
-                <button className="px-4 py-2 text-sm bg-[#A9927D] text-[#1F1D1D] rounded-full hover:bg-[#D1B38A] transition">
-                  Learn More
-                </button>
+                <Button
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="bg-[#9C6F42] dark:bg-[#E67E22] hover:bg-[#7B5A36] dark:hover:bg-[#D35400] text-white px-5 py-2 rounded-lg font-semibold transition duration-300"
+                >
+                  See All
+                </Button>
               </div>
             </div>
           ))}

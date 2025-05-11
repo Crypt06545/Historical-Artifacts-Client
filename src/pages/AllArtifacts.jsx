@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import LoadingSpinner from "../components/Loader";
 import { Helmet } from "react-helmet-async";
 
+
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

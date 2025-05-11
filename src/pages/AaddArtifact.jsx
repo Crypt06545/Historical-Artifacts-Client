@@ -4,12 +4,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+
 const AddArtifact = () => {
   const { user } = useContext(AuthContext);
-  // console.log(user);
   const navigate = useNavigate();
-
-  // console.log(user?.email);
 
   const [addArtifacts, setAddArtifacts] = useState({
     artifactName: "",
@@ -39,21 +37,18 @@ const AddArtifact = () => {
   };
 
   const handleAddArtifact = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
     axios
       .post(`${import.meta.env.VITE_API_BASE_URL}/add-artifact`, addArtifacts, {
         withCredentials: true,
       })
       .then((response) => {
-        // Handle the successful response
-        // console.log("Artifact added successfully:", response.data);
-        toast.success("Artifact added successfully!"); // Show the success toast
-        navigate("/all-artifacts"); // Navigate to the desired page
+        toast.success("Artifact added successfully!");
+        navigate("/all-artifacts");
       })
       .catch((error) => {
-        // Handle any errors
         console.error("Error adding artifact:", error);
-        toast.error("Failed to add artifact. Please try again."); // Display an error message
+        toast.error("Failed to add artifact. Please try again.");
       });
   };
 
@@ -62,16 +57,14 @@ const AddArtifact = () => {
       <Helmet>
         <title>EGYPT - Add Artifact</title>
       </Helmet>
-      <div className="bg-[#1F1D1D] min-h-screen py-20 flex items-center justify-center">
-        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
-          <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">
-            Add New Artifact
-          </h1>
+      <div className="bg-[#302E2F] dark:bg-[#1F1D1D] min-h-screen py-20 flex items-center justify-center">
+        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-white/10 dark:bg-[#4A4746] text-white dark:text-[#E0D9D1]">
+          <h1 className="text-2xl font-bold text-center">Add New Artifact</h1>
           <form onSubmit={handleAddArtifact} className="space-y-6">
-            {/* Artifact Name and Image (Side by Side) */}
+            {/* Artifact Name and Image */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1 text-sm">
-                <label htmlFor="artifactName" className="block text-[#E0D9D1]">
+                <label htmlFor="artifactName" className="block">
                   Artifact Name
                 </label>
                 <input
@@ -81,11 +74,11 @@ const AddArtifact = () => {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter artifact name"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
               <div className="space-y-1 text-sm">
-                <label htmlFor="artifactImage" className="block text-[#E0D9D1]">
+                <label htmlFor="artifactImage" className="block">
                   Artifact Image (Valid URL)
                 </label>
                 <input
@@ -95,37 +88,65 @@ const AddArtifact = () => {
                   value={addArtifacts.artifactImage}
                   onChange={handleInputChange}
                   placeholder="Enter image URL"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
             </div>
 
-            {/* Artifact Type and Historical Context (Side by Side) */}
+            {/* Artifact Type and Historical Context */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1 text-sm">
-                <label htmlFor="artifactType" className="block text-[#E0D9D1]">
+                <label htmlFor="artifactType" className="block">
                   Artifact Type
                 </label>
                 <select
+                  id="artifactType"
                   name="artifactType"
                   required
                   value={addArtifacts.artifactType}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D] text-gray-900 dark:text-[#E0D9D1]"
                 >
-                  <option value="Tools">Tools</option>
-                  <option value="Weapons">Weapons</option>
-                  <option value="Documents">Documents</option>
-                  <option value="Writings">Writings</option>
-                  <option value="Burial Artifact">Burial Artifact</option>
-                  <option value="Monument">Monument</option>
+                  <option
+                    value="Tools"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Tools
+                  </option>
+                  <option
+                    value="Weapons"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Weapons
+                  </option>
+                  <option
+                    value="Documents"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Documents
+                  </option>
+                  <option
+                    value="Writings"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Writings
+                  </option>
+                  <option
+                    value="Burial Artifact"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Burial Artifact
+                  </option>
+                  <option
+                    value="Monument"
+                    className="bg-white dark:bg-[#5D5453] text-gray-900 dark:text-[#E0D9D1]"
+                  >
+                    Monument
+                  </option>
                 </select>
               </div>
               <div className="space-y-1 text-sm">
-                <label
-                  htmlFor="historicalContext"
-                  className="block text-[#E0D9D1]"
-                >
+                <label htmlFor="historicalContext" className="block">
                   Historical Context
                 </label>
                 <textarea
@@ -135,15 +156,15 @@ const AddArtifact = () => {
                   required
                   rows="3"
                   placeholder="Enter historical context"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 ></textarea>
               </div>
             </div>
 
-            {/* Created At and Discovered At (Side by Side) */}
+            {/* Created At and Discovered At */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1 text-sm">
-                <label htmlFor="createdAt" className="block text-[#E0D9D1]">
+                <label htmlFor="createdAt" className="block">
                   Created At
                 </label>
                 <input
@@ -153,11 +174,11 @@ const AddArtifact = () => {
                   value={addArtifacts.createdAt}
                   onChange={handleInputChange}
                   placeholder="e.g., 100 BC"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
               <div className="space-y-1 text-sm">
-                <label htmlFor="discoveredAt" className="block text-[#E0D9D1]">
+                <label htmlFor="discoveredAt" className="block">
                   Discovered At
                 </label>
                 <input
@@ -167,15 +188,15 @@ const AddArtifact = () => {
                   value={addArtifacts.discoveredAt}
                   onChange={handleInputChange}
                   placeholder="e.g., 1799"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
             </div>
 
-            {/* Discovered By and Present Location (Side by Side) */}
+            {/* Discovered By and Present Location */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1 text-sm">
-                <label htmlFor="discoveredBy" className="block text-[#E0D9D1]">
+                <label htmlFor="discoveredBy" className="block">
                   Discovered By
                 </label>
                 <input
@@ -185,14 +206,11 @@ const AddArtifact = () => {
                   value={addArtifacts.discoveredBy}
                   onChange={handleInputChange}
                   placeholder="Enter discoverer's name"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
               <div className="space-y-1 text-sm">
-                <label
-                  htmlFor="presentLocation"
-                  className="block text-[#E0D9D1]"
-                >
+                <label htmlFor="presentLocation" className="block">
                   Present Location
                 </label>
                 <input
@@ -202,29 +220,30 @@ const AddArtifact = () => {
                   value={addArtifacts.presentLocation}
                   onChange={handleInputChange}
                   placeholder="Enter present location"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
                 />
               </div>
             </div>
 
             {/* Logged-In User Information */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="userInfo" className="block text-[#E0D9D1]">
+              <label htmlFor="userInfo" className="block">
                 Added By
               </label>
               <input
                 type="text"
                 name="userInfo"
                 defaultValue={user?.email}
-                // value={addArtifacts.userInfo}
-                onChange={handleInputChange}
                 readOnly
-                className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                className="w-full px-4 py-3 rounded-md bg-white/5 dark:bg-[#5D5453] focus:ring-2 focus:ring-[#9C6F42] dark:focus:ring-[#A9927D]"
               />
             </div>
 
             {/* Add Artifact Button */}
-            <button className="block w-full p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]">
+            <button
+              type="submit"
+              className="block w-full p-3 text-center rounded-sm bg-[#9C6F42] dark:bg-[#A9927D] text-white hover:bg-[#7B5A36] dark:hover:bg-[#D1B38A] transition-colors"
+            >
               Add Artifact
             </button>
           </form>

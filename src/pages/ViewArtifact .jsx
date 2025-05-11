@@ -16,7 +16,9 @@ const ViewArtifact = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false); // State for modal visibility
-
+  const handleBtn=()=>{
+    navigate('/all-artifacts')
+  }
   // Fetch the artifact details on component mount
   useEffect(() => {
     const fetchArtifactDetails = async () => {
@@ -188,7 +190,10 @@ const ViewArtifact = () => {
           {/* Back Button */}
           <div className="flex justify-center">
             <button
-              onClick={() => navigate("/all-artifacts")}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                handleBtn()
+              }}
               className="block w-1/3 p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]"
             >
               Back to Artifacts
