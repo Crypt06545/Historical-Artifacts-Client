@@ -16,7 +16,7 @@ The **Historical Artifacts Tracker** is a web application designed to manage, ex
 
 - **Authentication System**:
 
-  - Secure login and registration using email/password and social login (Google/GitHub).
+  - Secure login and registration using email/password and social login (Google).
   - Password validation with strong security checks.
   - Conditional navigation links and protected routes for private features.
 
@@ -38,6 +38,7 @@ The **Historical Artifacts Tracker** is a web application designed to manage, ex
   - Toast/SweetAlert notifications for all CRUD operations.
   - Users can leave comments on individual artifact pages to share their insights or feedback.
   - Loading spinner for data-fetching states.
+  - Smooth animations implemented using GSAP (GreenSock Animation Platform) for enhanced user interaction.
 
 <!-- ---
 
