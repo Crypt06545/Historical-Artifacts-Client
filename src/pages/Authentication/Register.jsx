@@ -5,14 +5,25 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Lottie from "lottie-react";
-import registerAnimation from "../../assets/login.json"; // You might want to use a different animation for register
-
+import registerAnimation from "../../assets/login.json";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 const Register = () => {
   const navigate = useNavigate();
   const { googleSignIn, createNewUser, updateUserProfile, setUser } =
     useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
+
+    useGSAP(() => {
+      const tl = gsap.timeline();
+      tl.from(".animate-tt", {
+        opacity: 0,
+        scale:1,
+        delay:0.15,
+        duration: 1,
+      });
+    }, []);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -65,7 +76,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
+    <div className="animate-tt bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
       <Helmet>
         <title>Egypt - Register</title>
       </Helmet>

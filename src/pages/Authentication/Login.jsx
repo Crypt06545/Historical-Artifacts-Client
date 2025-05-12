@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/login.json";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +19,16 @@ const Login = () => {
 
   const { logIn, googleSignIn, setUser } = useContext(AuthContext);
 
+  useGSAP(() => {
+    const tl = gsap.timeline();
+    tl.from(".animate-tt", {
+      opacity: 0,
+      scale:1,
+      delay:0.15,
+      duration: 1,
+    });
+  }, []);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") {
@@ -62,18 +74,23 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
+    <div className="animate-tt bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
       <Helmet>
         <title>Egypt - Login</title>
       </Helmet>
       <div className="max-w-5xl w-full bg-[#2C2A2A] dark:bg-[#1C1B1B] text-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 p-8 md:p-10 space-y-6">
-          <h1 className="text-3xl font-bold text-center text-[#D99578] dark:text-[#E67E22]">Login</h1>
+          <h1 className="text-3xl font-bold text-center text-[#D99578] dark:text-[#E67E22]">
+            Login
+          </h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="email" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
+              <label
+                htmlFor="email"
+                className="block text-[#CCCCCC] dark:text-[#B0B0B0]"
+              >
                 Email
               </label>
               <input
@@ -88,7 +105,10 @@ const Login = () => {
             </div>
             {/* Password */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="password" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
+              <label
+                htmlFor="password"
+                className="block text-[#CCCCCC] dark:text-[#B0B0B0]"
+              >
                 Password
               </label>
               <div className="relative">
@@ -152,7 +172,11 @@ const Login = () => {
 
         {/* Right Side - Animation */}
         <div className="hidden md:flex items-center justify-center w-1/2 bg-[#121212]">
-          <Lottie animationData={loginAnimation} loop={true} className="w-full h-[400px]" />
+          <Lottie
+            animationData={loginAnimation}
+            loop={true}
+            className="w-full h-[400px]"
+          />
         </div>
       </div>
     </div>

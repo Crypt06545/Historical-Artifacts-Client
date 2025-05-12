@@ -14,45 +14,51 @@ The **Historical Artifacts Tracker** is a web application designed to manage, ex
 
 ## 🎯 Key Features
 
-- **Authentication System**:
+### 🔐 Authentication System
 
-  - Secure login and registration using email/password and social login (Google).
-  - Password validation with strong security checks.
-  - Conditional navigation links and protected routes for private features.
+- Secure login and registration using email/password and social login (Google)
+- Password validation with strong security checks
+- Conditional navigation links and protected routes for private features
 
-- **Artifact Management**:
+### 🏺 Artifact Management
 
-  - Add, update, and delete artifacts (logged-in users).
-  - Like/unlike artifacts with database synchronization.
-  - View personal artifacts and liked artifacts separately.
+- **CRUD Operations**: Add, update, and delete artifacts (logged-in users)
+- **Likes System**: Like/unlike artifacts with database synchronization
+- **Personal Collections**: View personal artifacts and liked artifacts separately
+- **Search Functionality**: Find artifacts by name from the All Artifacts page
+- **Comments**: Leave comments on individual artifact pages
 
-- **Dynamic UI**:
+### 🎨 Dynamic UI
 
-  - Fully responsive design for mobile, tablet, and desktop.
-  - Attractive banner/slider and featured artifacts section.
-  - Search functionality for artifacts by name.
+- Fully responsive design for all devices (mobile, tablet, desktop)
+- Attractive banner/slider and featured artifacts section
+- Loading spinner for data-fetching states
+- Smooth animations using GSAP (GreenSock Animation Platform)
 
-- **Extras**:
-  - Dynamic page titles for each route.
-  - Meaningful 404 page for invalid routes.
-  - Toast/SweetAlert notifications for all CRUD operations.
-  - Users can leave comments on individual artifact pages to share their insights or feedback.
-  - Loading spinner for data-fetching states.
-  - Smooth animations implemented using GSAP (GreenSock Animation Platform) for enhanced user interaction.
+### ✨ Extras
 
-<!-- ---
-
-## 🖼️ Screenshots
-**(Include screenshots of key pages, such as the Home page, Add Artifact page, Artifact Details page, etc.)** -->
+- Dynamic page titles for each route
+- Meaningful 404 page for invalid routes
+- Toast/SweetAlert notifications for all CRUD operations
+- Dark mode support for comfortable viewing
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: React.js, Tailwind CSS, React Router
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Authentication**: Firebase
+### Frontend
+
+- React.js
+- Tailwind CSS
+- React Router
+- GSAP (Animations)
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB (Database)
+- Firebase (Authentication)
 
 ---
 
@@ -60,9 +66,9 @@ The **Historical Artifacts Tracker** is a web application designed to manage, ex
 
 ### Prerequisites
 
-- Node.js
-- MongoDB
-- Firebase Account
+- Node.js (v16+ recommended)
+- MongoDB Atlas account or local MongoDB instance
+- Firebase project for authentication
 
 ### Client-Side Installation
 

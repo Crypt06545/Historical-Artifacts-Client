@@ -105,7 +105,7 @@ const Navbar = () => {
             <div className="relative">
               <div onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)} className="cursor-pointer">
                 <img
-                  src={user?.photoURL}
+                  src={user?.photoURL || 'https://i.pinimg.com/474x/62/01/0d/62010d848b790a2336d1542fcda51789.jpg'}
                   alt="User"
                   className="h-10 w-10 rounded-full border-2 border-[#9C6F42] dark:border-[#E67E22]"
                   referrerPolicy="no-referrer"
