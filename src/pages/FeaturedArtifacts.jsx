@@ -36,7 +36,7 @@ const FeaturedArtifacts = () => {
           gsap.from(card, {
             opacity: 0,
             y: 20,
-            duration: 0.35,
+            duration: 1,
             stagger: true,
             delay: i * 0.23,
             scrollTrigger: {
