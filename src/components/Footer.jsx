@@ -10,9 +10,6 @@ const Footer = () => {
           <h1 className="text-2xl font-bold text-[#e6d9c4] flex items-center gap-2">
             <span className="text-4xl font-extrabold">||</span> astoria
           </h1>
-          <p className="mt-4 text-sm text-gray-300">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec.
-          </p>
           <div className="flex gap-4 mt-4 text-lg text-[#e6d9c4]">
             <FaFacebookF className="cursor-pointer hover:text-white" />
             <FaTwitter className="cursor-pointer hover:text-white" />

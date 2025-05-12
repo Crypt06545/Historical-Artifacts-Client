@@ -1,3 +1,5 @@
+import ArtifactFaq from "../components/ArtifactFaq";
+import BookTicket from "../components/BookTicket";
 import Carousel from "../components/Carousel";
 
 import Contact from "../components/Contact";
@@ -13,7 +15,9 @@ const Home = () => {
       <FeatureSection />
       <Collection />
       <FeaturedArtifacts />
+      <BookTicket/>
       <EducationalPrograms />
+      <ArtifactFaq/>
       {/* <Contact /> */}
     </div>
   );

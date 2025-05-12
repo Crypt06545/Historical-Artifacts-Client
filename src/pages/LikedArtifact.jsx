@@ -13,14 +13,13 @@ const LikedArtifact = () => {
 
   useEffect(() => {
     if (user?.email) {
-      // Fetch liked artifact IDs
       axios
         .get(
           `${import.meta.env.VITE_API_BASE_URL}/liked-artifacts/${user.email}`,
           { withCredentials: true }
         )
         .then((response) => {
-          setLikedArtifactIds(response.data.artifactIds); // Store liked artifact IDs
+          setLikedArtifactIds(response.data.artifactIds);
         })
         .catch((error) => {
           console.error("Error fetching liked artifacts:", error);
@@ -29,22 +28,21 @@ const LikedArtifact = () => {
   }, [user?.email]);
 
   useEffect(() => {
-    // Fetch all artifacts after liked artifact IDs are fetched
     axios
       .get(`${import.meta.env.VITE_API_BASE_URL}/all-artifacts`)
       .then((response) => {
-        setAllArtifacts(response.data); // Store all artifact details
-        setLoading(false); // Stop loading after data is fetched
+        setAllArtifacts(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching all artifacts:", error);
         setLoading(false);
       });
-  }, [likedArtifactIds]); // Fetch all artifacts after liked artifacts are loaded
+  }, [likedArtifactIds]);
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen bg-[#302E2F] dark:bg-[#1F1D1D]">
         <Helmet>
           <title>EGYPT - Liked Artifact</title>
         </Helmet>
@@ -58,18 +56,18 @@ const LikedArtifact = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#1F1D1D]">
+    <div className="min-h-screen bg-[#302E2F] dark:bg-[#1F1D1D]">
       <Helmet>
         <title>EGYPT - Liked Artifact</title>
       </Helmet>
-      <div className="">
+      <div className="w-[89%] mx-auto py-10">
         {/* Title */}
-        <h1 className="text-white text-3xl pt-8 text-center">
+        <h1 className="text-white dark:text-[#E0D9D1] text-3xl font-bold text-center mb-8">
           Liked Artifacts
         </h1>
 
         {/* Liked Artifacts Cards or No Data Message */}
-        <div className="w-11/12 mx-auto py-10">
+        <div className="py-10">
           {likedArtifacts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {likedArtifacts.map((artifact) => (
@@ -77,7 +75,7 @@ const LikedArtifact = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-white text-xl">
+            <div className="text-center text-white dark:text-[#E0D9D1] text-xl">
               No Liked Artifacts Found
             </div>
           )}

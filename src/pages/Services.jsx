@@ -1,14 +1,17 @@
-
-import Feedback from '../components/Feedback'
-import PageThumb from '../components/pageThumb'
+import { Helmet } from "react-helmet-async";
+import Feedback from "../components/Feedback";
+import PageThumb from "../components/pageThumb";
 
 const Services = () => {
   return (
     <div>
-      <PageThumb heading={'Services'} />
-      <Feedback/>
+      <Helmet>
+        <title>EGYPT - Services</title>
+      </Helmet>
+      <PageThumb heading={"Services"} />
+      <Feedback />
     </div>
-  )
-}
+  );
+};
 
-export default Services
+export default Services;
