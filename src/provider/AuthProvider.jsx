@@ -25,16 +25,20 @@ const AuthProvider = ({ children }) => {
 const createNewUser = (email, password) => {
   setLoading(true);
   return createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
+    .then((userCredential) => {
       toast.success("Account created successfully!");
+      return userCredential; // Return the userCredential (it contains the user object)
     })
     .catch((error) => {
+      console.error('Error creating user:', error);
       toast.error(error.message || "Failed to create account. Please try again.");
     })
     .finally(() => {
       setLoading(false);
     });
 };
+
+
 
   // Log in a user
   const logIn = (email, password) => {

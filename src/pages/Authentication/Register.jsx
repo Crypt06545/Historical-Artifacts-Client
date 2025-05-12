@@ -31,14 +31,20 @@ const Register = () => {
       // 1. User Registration
       const result = await createNewUser(email, pass);
       console.log(result);
+
       // 2. Update user profile
-      await updateUserProfile(name, photo);
-      setUser({ ...result.user, photoURL: photo, displayName: name });
-      toast.success("Signup Successful");
-      navigate("/");
+      try {
+        await updateUserProfile(name, photo);
+        setUser({ ...result.user, photoURL: photo, displayName: name });
+        // toast.success("Signup Successful");
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+        toast.error("Failed to update profile.");
+      }
     } catch (err) {
       console.log(err);
-      toast.error(err?.message);
+      toast.error(err?.message || "Signup failed. Please try again.");
     }
   };
 
@@ -58,7 +64,10 @@ const Register = () => {
     <div>
       <Helmet>
         <title>Egypt - Register</title>
-        <meta name="description" content="Welcome to the homepage of My Website." />
+        <meta
+          name="description"
+          content="Welcome to the homepage of My Website."
+        />
       </Helmet>
       <div className="bg-[#1F1D1D] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
