@@ -4,10 +4,15 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import Lottie from "lottie-react";
+import registerAnimation from "../../assets/login.json"; // You might want to use a different animation for register
+
 const Register = () => {
   const navigate = useNavigate();
   const { googleSignIn, createNewUser, updateUserProfile, setUser } =
     useContext(AuthContext);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,13 +35,13 @@ const Register = () => {
     try {
       // 1. User Registration
       const result = await createNewUser(email, pass);
-      console.log(result);
+      // console.log(result);
 
       // 2. Update user profile
       try {
         await updateUserProfile(name, photo);
         setUser({ ...result.user, photoURL: photo, displayName: name });
-        // toast.success("Signup Successful");
+        // toast.success("Registration Successful!");
         navigate("/");
       } catch (err) {
         console.log(err);
@@ -59,121 +64,118 @@ const Register = () => {
     }
   };
 
-  const [showPassword, setShowPassword] = useState(false);
   return (
-    <div>
+    <div className="bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
       <Helmet>
         <title>Egypt - Register</title>
-        <meta
-          name="description"
-          content="Welcome to the homepage of My Website."
-        />
       </Helmet>
-      <div className="bg-[#1F1D1D] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
-          <h1 className="text-2xl font-bold text-center text-[#E0D9D1]">
-            Register
-          </h1>
+      <div className="max-w-5xl w-full bg-[#2C2A2A] dark:bg-[#1C1B1B] text-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
+        {/* Left Side - Form */}
+        <div className="w-full md:w-1/2 p-8 md:p-10 space-y-6">
+          <h1 className="text-3xl font-bold text-center text-[#D99578] dark:text-[#E67E22]">Register</h1>
           <form onSubmit={handleSignUp} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Name Field */}
-              <div className="space-y-1 text-sm">
-                <label htmlFor="name" className="block text-[#E0D9D1]">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
-                />
-              </div>
-
-              {/* Email Field */}
-              <div className="space-y-1 text-sm">
-                <label htmlFor="email" className="block text-[#E0D9D1]">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
-                />
-              </div>
-            </div>
-
-            {/* Password Field */}
+            {/* Name */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="password" className="block text-[#E0D9D1]">
+              <label htmlFor="name" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+                className="w-full px-4 py-3 rounded-md bg-[#3A3838] text-[#E0D9D1] focus:ring-2 focus:ring-[#9C6F42]"
+              />
+            </div>
+            
+            {/* Email */}
+            <div className="space-y-1 text-sm">
+              <label htmlFor="email" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                className="w-full px-4 py-3 rounded-md bg-[#3A3838] text-[#E0D9D1] focus:ring-2 focus:ring-[#9C6F42]"
+              />
+            </div>
+            
+            {/* Password */}
+            <div className="space-y-1 text-sm">
+              <label htmlFor="password" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
                 Password
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder="Password"
-                  className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                  placeholder="Enter your password"
+                  required
+                  className="w-full px-4 py-3 rounded-md bg-[#3A3838] text-[#E0D9D1] focus:ring-2 focus:ring-[#9C6F42]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="flex justify-center items-center absolute inset-y-0 right-2 text-[#D1B38A] hover:text-[#A9927D]"
+                  className="absolute inset-y-0 right-3 flex items-center text-[#D1B38A] hover:text-[#E67E22]"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
             </div>
-
-            {/* Photo URL Field */}
+            
+            {/* Photo URL */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="photoURL" className="block text-[#E0D9D1]">
+              <label htmlFor="photo" className="block text-[#CCCCCC] dark:text-[#B0B0B0]">
                 Photo URL
               </label>
               <input
                 type="text"
                 name="photo"
-                placeholder="Profile Photo URL"
-                className="w-full px-4 py-3 rounded-md bg-[#5D5453] text-[#E0D9D1] focus:ring-2 focus:ring-[#A9927D]"
+                placeholder="Enter your photo URL"
+                className="w-full px-4 py-3 rounded-md bg-[#3A3838] text-[#E0D9D1] focus:ring-2 focus:ring-[#9C6F42]"
               />
             </div>
-
-            <button className="block w-full p-3 text-center rounded-sm bg-[#A9927D] text-[#1F1D1D] hover:bg-[#D1B38A]">
+            
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="block w-full p-3 text-center rounded-md bg-[#9C6F42] hover:bg-[#7B5A36] text-white font-semibold transition duration-300"
+            >
               Register
             </button>
           </form>
 
-          <div className="flex items-center pt-4 space-x-1">
-            <div className="flex-1 h-px sm:w-16 bg-[#D1B38A]"></div>
-            <p className="px-3 text-sm text-[#E0D9D1]">
-              Register with social accounts
-            </p>
-            <div className="flex-1 h-px sm:w-16 bg-[#D1B38A]"></div>
+          <div className="divider text-center text-sm text-[#CCCCCC] dark:text-[#AAAAAA]">
+            ─ OR ─
           </div>
 
-          <div className="flex justify-center space-x-4">
-            <button
-              onClick={handleGoogleSignIn}
-              aria-label="Log in with Google"
-              className="p-3 rounded-sm bg-[#D1B38A] hover:bg-[#A9927D]"
-            >
-              {/* Google Icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-                className="w-5 h-5 fill-current"
-              >
-                <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
-              </svg>
-            </button>
-          </div>
+          {/* Google Sign In */}
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-[#E67E22] hover:bg-[#D35400] text-white font-semibold transition duration-300"
+          >
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Sign up with Google
+          </button>
 
-          <p className="mt-4 text-center text-sm text-[#E0D9D1]">
+          {/* Login Link */}
+          <p className="text-sm text-center text-[#B0B0B0]">
             Already have an account?{" "}
-            <Link to="/login" className="text-[#A9927D] hover:text-[#D1B38A]">
+            <Link to="/login" className="text-[#E67E22] hover:underline">
               Login
             </Link>
           </p>
+        </div>
+
+        {/* Right Side - Animation */}
+        <div className="hidden md:flex items-center justify-center w-1/2 bg-[#121212]">
+          <Lottie animationData={registerAnimation} loop={true} className="w-full h-[400px]" />
         </div>
       </div>
     </div>
