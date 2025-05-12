@@ -13,6 +13,7 @@ const Footer = () => {
               src={logo}
               alt="Lastoria Logo"
               className="w-28 object-contain"
+              
             />
           </div>
           <div className="flex gap-4 mt-4 text-lg text-[#e6d9c4]">
