@@ -79,8 +79,13 @@ The **Historical Artifacts Tracker** is a web application designed to manage, ex
    ```
 4. Configure `.env.local` for Firebase:
    ```env
-   VITE_FIREBASE_API_KEY=<your-api-key>
-   VITE_FIREBASE_AUTH_DOMAIN=<your-auth-domain>
+   VITE_API_KEY=<your-api-key>
+   VITE_AUTH_DOMAIN=<your-auth-domain>
+   VITE_PROJECT_ID=<your-project-id>
+   VVITE_STORAGE_BUCKET=<your-stroage-bucket->
+   VITE_MESSAGING_SENDER_ID=<your-messageId-key>
+   VITE_APP_ID=<your-api-key>
+   VITE_API_BASE_URL=<your-base-url>
    ```
 5. Start the development server:
    ```bash
