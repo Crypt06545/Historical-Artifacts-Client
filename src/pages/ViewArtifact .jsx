@@ -89,8 +89,8 @@ const ViewArtifact = () => {
       <Helmet>
         <title>EGYPT - Artifacts Details</title>
       </Helmet>
-      <div className="bg-[#1F1D1D] py-14 min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-[#4A4746] text-[#E0D9D1]">
+      <div className="bg-[#EAE4D5] dark:bg-[#1F1D1D] py-14 min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-[#55524a] dark:bg-[#4A4746] text-[#E0D9D1]">
           <h1 className="text-3xl font-bold text-center text-[#E0D9D1]">
             Artifact Details
           </h1>

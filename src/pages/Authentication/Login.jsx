@@ -74,7 +74,7 @@ const Login = () => {
   };
 
   return (
-    <div className="animate-tt bg-[#1F1D1D] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
+    <div className="animate-tt bg-[#EAE4D5] dark:bg-[#121212] min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
       <Helmet>
         <title>Egypt - Login</title>
       </Helmet>
