@@ -1,6 +1,6 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo2.png";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, NavLink } from "react-router-dom";
 import gsap from "gsap";
@@ -37,27 +37,27 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-white dark:text-gray-300"}>
+        <NavLink to="/" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-black dark:text-gray-300"}>
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-white dark:text-gray-300"}>
+        <NavLink to="/about-us" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-black dark:text-gray-300"}>
           About Us
         </NavLink>
       </li>
       <li>
-        <NavLink to="/services" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-white dark:text-gray-300"}>
+        <NavLink to="/services" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-black dark:text-gray-300"}>
           Services
         </NavLink>
       </li>
       <li>
-        <NavLink to="/all-artifacts" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-white dark:text-gray-300"}>
+        <NavLink to="/all-artifacts" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-black dark:text-gray-300"}>
           All Artifacts
         </NavLink>
       </li>
       <li>
-        <NavLink to="/add-artifact" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-white dark:text-gray-300"}>
+        <NavLink to="/add-artifact" className={({ isActive }) => isActive ? "text-[#D99578] dark:text-[#E67E22] font-semibold" : "text-black dark:text-gray-300"}>
           Add Artifacts
         </NavLink>
       </li>
@@ -72,7 +72,7 @@ const Navbar = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-[#302E2F] dark:bg-[#1A1A1A] shadow-sm dark:shadow-md">
+    <header className="sticky top-0 z-50 bg-[#EAE4D5] dark:bg-[#1A1A1A] shadow-sm dark:shadow-md">
       <div className="w-[89%] mx-auto flex items-center justify-between py-3">
         {/* Logo - unchanged */}
         <Link to="/" className="flex items-center gap-2">
@@ -89,7 +89,7 @@ const Navbar = () => {
           {/* Added Dark Mode Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full text-white dark:text-gray-300 hover:bg-[#7B5A36] dark:hover:bg-[#333333]"
+            className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-[#7B5A36] dark:hover:bg-[#333333]"
             aria-label="Toggle dark mode"
           >
             {theme === 'light' ? <FaMoon /> : <FaSun />}
@@ -113,7 +113,7 @@ const Navbar = () => {
               </div>
 
               {isUserDropdownOpen && (
-                <ul className="absolute right-0 bg-[#403D3D] dark:bg-[#2D2D2D] text-[#D99578] dark:text-[#E67E22] rounded-md mt-3 w-52 shadow p-2 z-50">
+                <ul className="absolute right-0 bg-[#EAE4D5] dark:bg-[#2D2D2D] text-[#D99578] dark:text-[#E67E22] rounded-md mt-3 w-52 shadow p-2 z-50">
                   <li className="text-white dark:text-gray-300 text-center font-medium">{user?.displayName}</li>
                   <li className="hover:bg-[#7B5A36] dark:hover:bg-[#333333] py-2 px-4 rounded-md">
                     <Link to="/my-add-artifact">My Artifacts</Link>

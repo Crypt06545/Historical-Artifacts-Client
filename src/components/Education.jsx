@@ -68,16 +68,16 @@ const EducationalPrograms = () => {
   }, []);
 
   return (
-    <section className="bg-[#2C2A29] py-12 text-[#E0D9D1]">
+    <section className="bg-[#EAE4D5] dark:bg-[#2C2A29] py-12 text-[#E0D9D1]">
       <div className="w-[89%] mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#D3C6A1] mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#D99578] mb-10">
           Educational Programs & Workshops
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {programs.map((item, index) => (
             <div
               key={index}
-              className="education-card bg-[#4F4A47] rounded-lg shadow-md hover:shadow-lg transition hover:scale-105 overflow-hidden dark:bg-[#3A3532]"
+              className="education-card bg-[#ece7e7] darK:bg-[#4F4A47] rounded-lg shadow-md hover:shadow-lg transition hover:scale-105 overflow-hidden dark:bg-[#3A3532]"
             >
               <img
                 src={item.img}
@@ -85,13 +85,13 @@ const EducationalPrograms = () => {
                 className="w-full h-40 object-cover"
               />
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-[#D3C6A1] mb-1 dark:text-[#E0D9D1]">
+                <h3 className="text-lg font-semibold text-[#D99578] mb-1 dark:text-[#E0D9D1]">
                   {item.title}
                 </h3>
-                <p className="text-sm italic text-[#B0A59A] mb-2 dark:text-[#B8A18E]">
+                <p className="text-sm italic text-black mb-2 dark:text-[#B8A18E]">
                   {item.desc}
                 </p>
-                <p className="text-xs text-[#D3C6A1] mb-3 dark:text-[#E0D9D1]">
+                <p className="text-xs text-[#000000] mb-3 dark:text-[#E0D9D1]">
                   Dates: {item.date}
                 </p>
                 <Button

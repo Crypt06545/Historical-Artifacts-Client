@@ -82,7 +82,7 @@ const AllArtifacts = () => {
     );
 
   return (
-    <div className="bg-[#1F1D1D]">
+    <div className="bg-[#EAE4D5] dark:bg-[#1F1D1D]">
       <Helmet>
         <title>EGYPT - All Artifacts</title>
       </Helmet>

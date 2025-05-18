@@ -57,9 +57,9 @@ const AddArtifact = () => {
       <Helmet>
         <title>EGYPT - Add Artifact</title>
       </Helmet>
-      <div className="bg-[#302E2F] dark:bg-[#1F1D1D] min-h-screen py-20 flex items-center justify-center">
-        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-white/10 dark:bg-[#4A4746] text-white dark:text-[#E0D9D1]">
-          <h1 className="text-2xl font-bold text-center">Add New Artifact</h1>
+      <div className="bg-[#EAE4D5] dark:bg-[#1F1D1D] min-h-screen py-20 flex items-center justify-center">
+        <div className="w-full max-w-4xl p-8 space-y-6 rounded-xl bg-[#55524a] dark:bg-[#4A4746] text-white dark:text-[#E0D9D1]">
+          <h1 className="text-2xl font-bold text-[#E67E22] text-center">Add New Artifact</h1>
           <form onSubmit={handleAddArtifact} className="space-y-6">
             {/* Artifact Name and Image */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

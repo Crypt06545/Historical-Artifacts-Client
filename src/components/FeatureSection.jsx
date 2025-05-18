@@ -19,10 +19,10 @@ const FeatureSection = () => {
   }, []);
 
   return (
-    <div className="py-10 px-4 bg-[#302E2F] dark:bg-[#1A1A1A]">
+    <div className="py-10 px-4 bg-[#EAE4D5] dark:bg-[#1A1A1A]">
       <div className="w-[90%] mx-auto flex flex-col lg:flex-row gap-4 items-center justify-between">
         {/* Feature Boxes */}
-        <div className="bg-[#403D3D] dark:bg-[#2D2D2D] text-white flex-1 rounded-xl w-full flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-[#444] dark:divide-[#333]">
+        <div className="bg-[#585858] dark:bg-[#2D2D2D] text-white flex-1 rounded-xl w-full flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-[#444] dark:divide-[#333]">
           {/* Box 1 */}
           <div className="flex-1 text-center p-10">
             <h3 className="animate-obj text-xl font-semibold text-[#D99578] dark:text-[#E67E22] mb-2">Many Collection</h3>

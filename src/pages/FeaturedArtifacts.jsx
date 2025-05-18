@@ -71,10 +71,10 @@ const FeaturedArtifacts = () => {
     );
 
   return (
-    <div className="bg-[#302E2F] dark:bg-[#1A1A1A] min-h-screen">
+    <div className="bg-[#EAE4D5] dark:bg-[#1A1A1A] min-h-screen">
       <div className="w-[89%] mx-auto py-10">
         <div className="text-center mb-8">
-          <h1 className="text-white text-3xl font-bold">Featured Artifacts</h1>
+          <h1 className="text-[#D99578] text-3xl font-bold">Featured Artifacts</h1>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">

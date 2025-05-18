@@ -43,21 +43,21 @@ const BookTicket = () => {
   }, [targetDate]);
 
   return (
-    <section className="py-16 px-4 md:px-12 bg-[#302E2F] dark:bg-[#1A1A1A] text-white dark:text-[#e6d9c4]">
-      <div className="w-[89%] mx-auto bg-white/10 dark:bg-[#2a2a2a] rounded-[30px] relative shadow-lg shadow-black/30 flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-8">
+    <section className="py-16 px-4 md:px-12 bg-[#EAE4D5] dark:bg-[#1A1A1A] text-white dark:text-[#e6d9c4]">
+      <div className="w-[94%] mx-auto bg-white/10 dark:bg-[#2a2a2a] rounded-[30px] relative shadow-lg shadow-black/30 flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-8">
 
         {/* Notch style - Left */}
-        <div className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 bg-[#302E2F] dark:bg-[#1A1A1A] rounded-full z-10"></div>
+        <div className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 dark:bg-[#1A1A1A] rounded-full z-10"></div>
 
         {/* Notch style - Right */}
-        <div className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 bg-[#302E2F] dark:bg-[#1A1A1A] rounded-full z-10"></div>
+        <div className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 dark:bg-[#1A1A1A] rounded-full z-10"></div>
 
         {/* Left Text Section */}
         <div className="md:w-1/2 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#9C6F42] dark:text-[#E67E22]">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#D99578] dark:text-[#E67E22]">
             Book Your Ticket!
           </h2>
-          <p className="text-sm md:text-base leading-6">
+          <p className="text-sm text-black dark:text-gray-200 md:text-base leading-6">
             Don't miss out—secure your spot for the most anticipated event of the year!
           </p>
         </div>
@@ -65,20 +65,20 @@ const BookTicket = () => {
         {/* Right Countdown Section */}
         <div className="md:w-1/2 flex justify-center gap-6 text-center">
           <div>
-            <p className="text-4xl font-bold">{timeLeft.days}</p>
-            <p className="text-xs uppercase tracking-widest">Days</p>
+            <p className="text-4xl text-black dark:text-gray-200 font-bold">{timeLeft.days}</p>
+            <p className="text-xs uppercase text-black dark:text-gray-200 tracking-widest">Days</p>
           </div>
           <div>
-            <p className="text-4xl font-bold">{timeLeft.hours}</p>
-            <p className="text-xs uppercase tracking-widest">Hours</p>
+            <p className="text-4xl text-black dark:text-gray-200 font-bold">{timeLeft.hours}</p>
+            <p className="text-xs text-black dark:text-gray-200 uppercase tracking-widest">Hours</p>
           </div>
           <div>
-            <p className="text-4xl font-bold">{timeLeft.minutes}</p>
-            <p className="text-xs uppercase tracking-widest">Minutes</p>
+            <p className="text-4xl text-black dark:text-gray-200 font-bold">{timeLeft.minutes}</p>
+            <p className="text-xs text-black dark:text-gray-200 uppercase tracking-widest">Minutes</p>
           </div>
           <div>
-            <p className="text-4xl font-bold">{timeLeft.seconds}</p>
-            <p className="text-xs uppercase tracking-widest">Seconds</p>
+            <p className="text-4xl text-black dark:text-gray-200 font-bold">{timeLeft.seconds}</p>
+            <p className="text-xs text-black dark:text-gray-200 uppercase tracking-widest">Seconds</p>
           </div>
         </div>
 

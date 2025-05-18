@@ -80,11 +80,11 @@ const MyAddedArtifacts = () => {
 
   if (!loading && artifacts.length === 0) {
     return (
-      <div className="text-center min-h-screen flex justify-center items-center bg-[#302E2F] dark:bg-[#1F1D1D]">
+      <div className="text-center min-h-screen flex justify-center items-center bg-[#EAE4D5] dark:bg-[#1F1D1D]">
         <Helmet>
           <title>EGYPT - My Added Artifact</title>
         </Helmet>
-        <p className="text-white dark:text-[#E0D9D1] text-xl">No data found</p>
+        <p className="text-black dark:text-[#E0D9D1] text-xl">No data found</p>
       </div>
     );
   }

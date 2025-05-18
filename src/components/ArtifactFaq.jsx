@@ -36,7 +36,7 @@ const ArtifactFaq = () => {
   return (
     <div 
       id="artifact-faq"
-      className="faq-section bg-[#302E2F] dark:bg-[#1A1A1A] text-white dark:text-[#e6d9c4] py-16 px-4 md:px-12"
+      className="faq-section bg-[#EAE4D5] dark:bg-[#1A1A1A]  dark:text-[#e6d9c4] py-16 px-4 md:px-12"
     >
       <div className="w-[89%] mx-auto">
         <div className="text-center mb-12">

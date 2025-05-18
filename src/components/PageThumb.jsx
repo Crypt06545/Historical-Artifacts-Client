@@ -13,7 +13,7 @@ const PageThumb = ({ heading }) => {
   }, []);
 
   return (
-    <div className="bg-[#302E2F] dark:bg-[#121212] py-6">
+    <div className="bg-[#EAE4D5] dark:bg-[#121212] py-6">
       <div className="w-[89%] mx-auto">
         <div
           className="relative rounded-xl overflow-hidden h-64 md:h-72 lg:h-80 flex items-center px-6 md:px-12"

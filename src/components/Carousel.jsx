@@ -9,7 +9,7 @@ import Slide from './Slide';
 
 export default function Carousel() {
   return (
-    <div className="bg-[#302E2F] dark:bg-[#1A1A1A]"> {/* ONLY THIS LINE CHANGED */}
+    <div className="bg-[#EAE4D5] dark:bg-[#1A1A1A]"> {/* ONLY THIS LINE CHANGED */}
       <div className="lg:w-[90%] mx-auto lg:p-4">
         <Swiper
           spaceBetween={30}

@@ -56,13 +56,13 @@ const LikedArtifact = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#302E2F] dark:bg-[#1F1D1D]">
+    <div className="min-h-screen bg-[#EAE4D5] dark:bg-[#1F1D1D]">
       <Helmet>
         <title>EGYPT - Liked Artifact</title>
       </Helmet>
       <div className="w-[89%] mx-auto py-10">
         {/* Title */}
-        <h1 className="text-white dark:text-[#E0D9D1] text-3xl font-bold text-center mb-8">
+        <h1 className="text-black dark:text-[#E0D9D1] text-3xl font-bold text-center mb-8">
           Liked Artifacts
         </h1>
 
@@ -75,7 +75,7 @@ const LikedArtifact = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-white dark:text-[#E0D9D1] text-xl">
+            <div className="text-center text-black dark:text-[#E0D9D1] text-xl">
               No Liked Artifacts Found
             </div>
           )}

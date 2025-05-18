@@ -49,14 +49,14 @@ const Collection = () => {
   }, []);
 
   return (
-    <div className="bg-[#1F1D1D] dark:bg-[#121212] text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#EAE4D5] dark:bg-[#121212] text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl my-10 mx-auto">
         <div className="info flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="mb-4 md:mb-0 text-center md:text-left">
             <h1 className="text-4xl font-bold mb-2 text-[#D99578] dark:text-[#E67E22]">
               Classic Hall, Quality Collection
             </h1>
-            <p className="text-[#CCCCCC] dark:text-[#B0B0B0]">
+            <p className="text-[#000] dark:text-[#B0B0B0]">
               Explore timeless elegance and artistic mastery in our curated
               collection. Each piece tells a story of heritage and
               craftsmanship.
@@ -76,7 +76,7 @@ const Collection = () => {
           </div>
         </div>
 
-        <hr className="border-[#333333] dark:border-[#444444] mb-12" />
+        <hr className="border-[#000] dark:border-[#444444] mb-12" />
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
           {/* Image Section */}
@@ -112,19 +112,19 @@ const Collection = () => {
             <ul className="features list-none space-y-4">
               <li className="flex items-start">
                 <FaCheckCircle className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" />
-                <p className="text-[#CCCCCC] dark:text-[#B0B0B0]">
+                <p className="text-[#000] dark:text-[#B0B0B0]">
                   Discover rare artifacts and historical pieces.
                 </p>
               </li>
               <li className="flex items-start">
                 <FaCheckCircle className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" />
-                <p className="text-[#CCCCCC] dark:text-[#B0B0B0]">
+                <p className="text-[#000] dark:text-[#B0B0B0]">
                   Experience the beauty of diverse artistic styles.
                 </p>
               </li>
               <li className="flex items-start">
                 <FaCheckCircle className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" />
-                <p className="text-[#CCCCCC] dark:text-[#B0B0B0]">
+                <p className="text-[#000] dark:text-[#B0B0B0]">
                   Immerse yourself in centuries of cultural richness.
                 </p>
               </li>

@@ -9,7 +9,7 @@ const About = () => {
     navigate('/all-artifacts')
   }
   return (
-    <div className="bg-[#302E2F] dark:bg-[#1A1A1A] text-white dark:text-[#e6d9c4]">
+    <div className="bg-[#EAE4D5] dark:bg-[#1A1A1A] text-black dark:text-[#e6d9c4]">
       <Helmet>
         <title>EGYPT - Museum History</title>
       </Helmet>
@@ -19,7 +19,7 @@ const About = () => {
       {/* Creative Introduction Section */}
       <section className="py-16 px-4 md:px-12">
         <div className="w-[89%] mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+          <h2 className="text-3xl  md:text-4xl font-semibold mb-6">
             Our Museum Journey
           </h2>
           <p className="text-sm md:text-lg leading-7 mb-8">
